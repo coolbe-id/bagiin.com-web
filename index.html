@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon -->
+<link rel="icon" href="https://i.ibb.co/20xH6jNt/file-0000000058d461f4889847d3895cf682.png" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Bagiin - Berbagi Bersama" />
+<meta property="og:description" content="Gabung dan bagikan barang bermanfaat bersama Bagiin." />
+<meta property="og:image" content="https://i.ibb.co/2f9BTCr/file-0000000025a861f68595d2f76bf9b51e.png" />
+<meta property="og:url" content="https://bagiin.com" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Bagiin - Berbagi Bersama" />
+<meta name="twitter:description" content="Gabung dan bagikan barang bermanfaat bersama Bagiin." />
+<meta name="twitter:image" content="https://i.ibb.co/2f9BTCr/file-0000000025a861f68595d2f76bf9b51e.png" />
+
+
+  <title>Donasi Barang Bekas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/heroicons@2.1.1/dist/heroicons.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+</head>
+<body class="bg-white text-black font-sans">
+  <div class="flex h-screen overflow-hidden">
+    <aside id="sidebar" class="hidden md:flex md:flex-col w-64 bg-black text-white p-4 rounded-r-2xl shadow-lg">
+      <h1 class="text-3xl font-extrabold mb-8 text-indigo-400">Donasi</h1>
+      <nav class="flex flex-col gap-5 text-lg">
+        <a href="#home" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+          <svg class="h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"></path>
+          </svg>
+          Beranda
+        </a>
+        <a href="#create-donation" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+          <svg class="h-6 w-6 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Buat Donasi
+        </a>
+        <a href="#profile" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+          <svg class="h-6 w-6 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Profil
+        </a>
+        <a href="#notifications" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+            <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+            Notifikasi
+        </a>
+        <div class="mt-auto pt-8">
+            <a href="#settings" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
+                <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.942 3.313.823 2.371 2.371a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.942 1.543-.823 3.313-2.371 2.371a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.942-3.313-.823-2.371-2.371a1.724 1.724 0 002.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Settings
+            </a>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col bg-gray-50 overflow-y-auto pb-16 md:pb-0"> <header id="homeHeader" class="flex justify-between items-center border-b p-4 bg-white shadow-sm sticky top-0 z-10 md:px-6">
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <div class="relative flex-grow md:flex-grow-0">
+            <input type="text" id="searchBar" placeholder="Cari donasi..." class="border border-gray-300 rounded-full pl-4 pr-10 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all duration-200 text-base md:text-lg">
+            <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main id="contentArea" class="p-4 md:p-8 flex-1 w-full mx-auto max-w-screen-xl">
+        <section id="homePage" class="active-page space-y-6">
+          <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Daftar Donasi</h2>
+          <div class="flex flex-wrap gap-3 md:gap-4">
+            <button class="category-filter bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition-colors text-sm md:text-base" data-category="all">Semua</button>
+            <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-category="pakaian">Pakaian</button>
+            <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-category="elektronik">Elektronik</button>
+            <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-category="buku">Buku</button>
+            <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-category="lainnya">Lainnya</button>
+            </div>
+          <div id="donasiList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            </div>
+          <div id="noResults" class="hidden text-center text-gray-600 mt-8 text-lg md:text-xl">Tidak ada hasil ditemukan.</div>
+        </section>
+
+        <section id="createDonationPage" class="hidden space-y-6 max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Buat Donasi Baru</h2>
+          <form id="createDonationForm" class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-5 md:space-y-6">
+            <div>
+              <label for="donationTitle" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Judul Donasi:</label>
+              <input type="text" id="donationTitle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+            </div>
+            <div>
+              <label for="donationDescription" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Deskripsi:</label>
+              <textarea id="donationDescription" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required></textarea>
+            </div>
+            <div>
+              <label for="donorName" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Nama Anda:</label>
+              <input type="text" id="donorName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+            </div>
+            <div>
+              <label for="donorEmail" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Email:</label>
+              <input type="email" id="donorEmail" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+            </div>
+            <div>
+              <label for="donorPhone" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Nomor Telepon:</label>
+              <input type="tel" id="donorPhone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+            </div>
+            <div>
+              <label class="block text-gray-700 text-sm md:text-base font-bold mb-2">Kondisi Barang:</label>
+              <div class="flex flex-wrap gap-4 md:gap-6">
+                <label class="inline-flex items-center text-base md:text-lg">
+                  <input type="radio" name="condition" value="Baru" class="form-radio text-indigo-600" required>
+                  <span class="ml-2 text-gray-700">Baru</span>
+                </label>
+                <label class="inline-flex items-center text-base md:text-lg">
+                  <input type="radio" name="condition" value="Seperti Baru" class="form-radio text-indigo-600">
+                  <span class="ml-2 text-gray-700">Seperti Baru</span>
+                </label>
+                <label class="inline-flex items-center text-base md:text-lg">
+                  <input type="radio" name="condition" value="Layak Pakai" class="form-radio text-indigo-600">
+                  <span class="ml-2 text-gray-700">Layak Pakai</span>
+                </label>
+                <label class="inline-flex items-center text-base md:text-lg">
+                  <input type="radio" name="condition" value="Bekas" class="form-radio text-indigo-600">
+                  <span class="ml-2 text-gray-700">Bekas</span>
+                </label>
+              </div>
+            </div>
+            <div>
+              <label for="category" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Pilih Kategori:</label>
+              <select id="category" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="pakaian">Pakaian</option>
+                <option value="elektronik">Elektronik</option>
+                <option value="buku">Buku</option>
+                <option value="perabotan">Perabotan</option>
+                <option value="makanan">Makanan</option>
+                <option value="mainan">Mainan</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label for="donationAddress" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Alamat Donasi:</label>
+              <input type="text" id="donationAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+              <button type="button" id="showMapBtn" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition-colors text-sm md:text-base">Tampilkan Peta</button>
+              <div id="mapContainer" class="mt-4 h-64 border rounded hidden"></div>
+            </div>
+            <div>
+              <label for="mediaUpload" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Gambar/Video (maks 5):</label>
+              <input type="file" id="mediaUpload" multiple accept="image/*,video/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg">
+              <div id="mediaPreview" class="mt-3 grid grid-cols-3 gap-2 md:gap-4"></div>
+            </div>
+            <button type="submit" id="uploadBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-200 text-base md:text-lg">
+              <span id="uploadBtnText">Upload Donasi</span>
+              <span id="uploadSpinner" class="hidden animate-spin h-5 w-5 border-4 border-white border-t-transparent rounded-full ml-2"></span>
+            </button>
+          </form>
+        </section>
+
+        <section id="profilePage" class="hidden space-y-6">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Profil Saya</h2>
+            <div id="profileContent" class="bg-white p-6 md:p-8 rounded-lg shadow-md flex flex-col items-center max-w-3xl mx-auto">
+                <div class="relative">
+                    <img id="profileImage" src="https://via.placeholder.com/150/F87171/FFFFFF?text=User" alt="Profile Picture" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-4 border-4 border-indigo-400 shadow-md">
+                    <span id="onlineStatusDot" class="absolute bottom-6 right-2 block w-4 h-4 rounded-full bg-gray-400 border-2 border-white"></span>
+                </div>
+                <h3 id="profileUsername" class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Guest User</h3>
+                <p id="profileBio" class="text-gray-600 text-center mb-4 max-w-prose text-base md:text-lg">Tulis bio Anda di sini. Jelaskan sedikit tentang diri Anda atau minat donasi Anda.</p>
+                <button id="editProfileBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full transition-colors text-sm md:text-base">Edit Profil</button>
+                <div class="mt-8 w-full">
+                    <h4 class="text-xl md:text-2xl font-semibold mb-4 text-gray-800">Donasi Saya</h4>
+                    <div id="myDonationsList" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        </div>
+                    <div id="noMyDonations" class="hidden text-center text-gray-600 mt-8 text-lg md:text-xl">Anda belum membuat donasi.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="editProfilePage" class="hidden space-y-6 max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Edit Profil</h2>
+            <form id="editProfileForm" class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-5 md:space-y-6">
+                <div class="flex flex-col items-center mb-4">
+                    <img id="editProfileImage" src="https://via.placeholder.com/150/F87171/FFFFFF?text=User" alt="Profile Picture" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-3 border-4 border-indigo-400 shadow-md">
+                    <input type="file" id="newProfileImage" accept="image/*" class="hidden">
+                    <label for="newProfileImage" class="cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full transition-colors text-sm md:text-base">Ubah Foto Profil</label>
+                </div>
+                <div>
+                    <label for="editUsername" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Username:</label>
+                    <input type="text" id="editUsername" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
+                </div>
+                <div>
+                    <label for="editBio" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Bio:</label>
+                    <textarea id="editBio" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg"></textarea>
+                </div>
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-200 text-base md:text-lg">Simpan Perubahan</button>
+            </form>
+        </section>
+
+        <section id="notificationsPage" class="hidden space-y-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Notifikasi</h2>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-4">
+                <div class="mb-4">
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3">Filter Notifikasi</h3>
+                    <div class="flex flex-wrap gap-3 md:gap-4">
+                        <button class="notification-filter bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition-colors text-sm md:text-base" data-notification-type="all">Semua</button>
+                        <button class="notification-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-notification-type="unread">Belum Dibaca</button>
+                        <button class="notification-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-notification-type="chats">Pesan Chat</button>
+                        <button class="notification-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-notification-type="requests">Permintaan Donasi</button>
+                    </div>
+                </div>
+                <div id="notificationList" class="space-y-3 md:space-y-4">
+                    <div id="noNotifications" class="hidden text-center text-gray-600 mt-8 text-lg md:text-xl">Tidak ada notifikasi.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chatPage" class="hidden flex flex-col h-[calc(100vh-64px-48px)] space-y-4 md:h-[calc(100vh-64px)] md:max-w-4xl mx-auto">
+            <div id="chatHeader" class="bg-white p-4 rounded-lg shadow-md flex items-center gap-4 sticky top-0 z-10 md:p-6">
+                <button id="backToNotificationsBtn" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </button>
+                <div class="relative">
+                    <img id="chatPartnerAvatar" src="https://via.placeholder.com/50/F87171/FFFFFF?text=?" alt="Chat Partner" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover">
+                    <span id="chatPartnerOnlineStatus" class="absolute bottom-0 right-0 block w-3 h-3 md:w-4 md:h-4 rounded-full bg-gray-400 border border-white"></span>
+                </div>
+                <div>
+                    <h3 id="chatPartnerName" class="font-bold text-lg md:text-xl text-gray-800">Nama Pengguna</h3>
+                    <p id="chatDonationTitle" class="text-sm md:text-base text-gray-600 truncate max-w-xs md:max-w-md">Donasi: Judul Donasi</p>
+                </div>
+                <div id="donorActions" class="ml-auto space-x-2 hidden">
+                    <button id="acceptRequestBtn" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full text-sm md:text-base">Terima Permintaan</button>
+                    <button id="rejectRequestBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm md:text-base">Tolak Permintaan</button>
+                </div>
+            </div>
+            <div id="chatMessages" class="flex-1 bg-white p-4 rounded-lg shadow-md overflow-y-auto space-y-3 md:space-y-4 md:p-6">
+                </div>
+            <div class="bg-white p-4 rounded-lg shadow-md flex gap-3 relative md:p-6">
+                <button id="emojiPickerBtn" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <svg class="h-6 w-6 md:h-7 md:w-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
+                <input type="text" id="chatInput" placeholder="Ketik pesan..." class="flex-grow border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-base md:text-lg">
+                <button id="sendMessageBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-full">
+                    <svg class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+                <div id="emojiPickerContainer" class="absolute bottom-full mb-2 right-0 bg-white shadow-lg rounded-lg z-20 hidden">
+                    <emoji-picker></emoji-picker>
+                </div>
+            </div>
+        </section>
+
+        <section id="donationDetailPage" class="hidden space-y-6 max-w-4xl mx-auto">
+            <button id="backToHomeBtn" class="text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-2 text-base md:text-lg">
+                <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali ke Beranda
+            </button>
+            <div id="donationDetailContent" class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-6">
+                </div>
+        </section>
+
+        <section id="settingsPage" class="hidden space-y-6 max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Pengaturan</h2>
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-4 md:space-y-5">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">Akun</h3>
+                    <a href="#edit-profile" class="block w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-lg flex justify-between items-center transition-colors mb-2 text-base md:text-lg">
+                        <span>Edit Profil</span>
+                        <svg class="h-5 w-5 md:h-6 md:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                    <button class="w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-lg flex justify-between items-center transition-colors mb-2 text-base md:text-lg">
+                        <span>Ubah Password</span>
+                        <svg class="h-5 w-5 md:h-6 md:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <button id="logoutBtn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors text-base md:text-lg">Logout</button>
+                </div>
+                <div>
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">Tentang</h3>
+                    <button class="w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-lg flex justify-between items-center transition-colors mb-2 text-base md:text-lg">
+                        <span>Service Center</span>
+                        <svg class="h-5 w-5 md:h-6 md:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <button class="w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-lg flex justify-between items-center transition-colors text-base md:text-lg">
+                        <span>Informasi Aplikasi</span>
+                        <svg class="h-5 w-5 md:h-6 md:w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <nav class="fixed bottom-0 left-0 right-0 flex justify-around bg-black text-white p-2 md:hidden rounded-t-2xl shadow-lg z-20">
+    <a href="#home" class="flex flex-col items-center p-2 rounded-lg text-sm hover:bg-gray-800 transition-colors w-1/4">
+      <svg class="h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"></path>
+      </svg>
+    </a>
+    <a href="#create-donation" class="flex flex-col items-center p-2 rounded-lg text-sm hover:bg-gray-800 transition-colors w-1/4">
+      <svg class="h-6 w-6 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </a>
+    <a href="#profile" class="flex flex-col items-center p-2 rounded-lg text-sm hover:bg-gray-800 transition-colors w-1/4">
+      <svg class="h-6 w-6 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    </a>
+    <a href="#notifications" class="flex flex-col items-center p-2 rounded-lg text-sm hover:bg-gray-800 transition-colors w-1/4">
+        <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+        </svg>
+    </a>
+  </nav>
+
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-lg p-6 md:p-8 shadow-xl w-full max-w-md md:max-w-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="modalTitle" class="text-xl md:text-2xl font-bold">Judul Modal</h3>
+        <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+          <svg class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="modalBody">
+        </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
+  <script>
+    // Firebase config - REPLACE WITH YOUR ACTUAL CONFIG
+    const firebaseConfig = {
+      apiKey: "AIzaSyDdSg1N0RWimvqduIkuTNoXzY1uW8-qPwg",
+      authDomain: "pinup-f0c6d.firebaseapp.com",
+      projectId: "pinup-f0c6d",
+      storageBucket: "pinup-f0c6d.firebasestorage.app",
+      messagingSenderId: "975740522083",
+      appId: "1:975740522083:web:3b34e1ee179f47cd5db256",
+      measurementId: "G-J4VB9XSSEF"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const storage = firebase.storage(); // Initialize Firebase Storage
+
+    let currentUserId = null;
+    let unsubscribeOnlineStatus = null; // To manage online status listener
+
+    // Anonymous Auth with permanent ID
+    auth.signInAnonymously().then(userCred => {
+      currentUserId = userCred.user.uid;
+      console.log("Signed in anonymously with UID:", currentUserId);
+      // Ensure user profile exists for anonymous user (for username/bio)
+      db.collection('users').doc(currentUserId).set({
+        username: 'Pengguna Anonim ' + currentUserId.substring(0, 4),
+        bio: 'Hai! Saya pengguna baru di Donasi.',
+        profilePhotoUrl: "https://via.placeholder.com/150/F87171/FFFFFF?text=Anonim",
+        lastOnline: firebase.firestore.FieldValue.serverTimestamp(),
+        isOnline: true,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).then(() => {
+        setupOnlineStatusListener(currentUserId);
+        loadDonasi();
+        loadUserProfile(currentUserId);
+      }).catch(error => {
+        console.error("Error setting up anonymous user profile:", error);
+      });
+    }).catch(error => {
+      console.error("Error signing in anonymously:", error);
+    });
+
+    // --- Online Status Management ---
+    function setupOnlineStatusListener(uid) {
+        if (unsubscribeOnlineStatus) {
+            unsubscribeOnlineStatus(); // Unsubscribe previous listener if exists
+        }
+
+        const userStatusRef = db.collection('users').doc(uid);
+
+        // Set online status on connect
+        userStatusRef.update({
+            isOnline: true,
+            lastOnline: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Set offline status on disconnect (unreliable for anonymous users without persistent sessions)
+        // For production, consider using Firebase Realtime Database for true presence
+        window.addEventListener('beforeunload', () => {
+             userStatusRef.update({
+                isOnline: false,
+                lastOnline: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        });
+
+        // Listen for changes to current user's online status (for profile page)
+        unsubscribeOnlineStatus = userStatusRef.onSnapshot(doc => {
+            const userData = doc.data();
+            const onlineStatusDot = document.getElementById('onlineStatusDot');
+            if (onlineStatusDot) {
+                if (userData && userData.isOnline) {
+                    onlineStatusDot.classList.remove('bg-gray-400');
+                    onlineStatusDot.classList.add('bg-green-500');
+                } else {
+                    onlineStatusDot.classList.remove('bg-green-500');
+                    onlineStatusDot.classList.add('bg-gray-400');
+                }
+            }
+        });
+    }
+
+
+    // --- UI Elements ---
+    const homeHeader = document.getElementById('homeHeader'); // NEW
+    const contentArea = document.getElementById('contentArea');
+    const homePage = document.getElementById('homePage');
+    const createDonationPage = document.getElementById('createDonationPage');
+    const profilePage = document.getElementById('profilePage');
+    const editProfilePage = document.getElementById('editProfilePage');
+    const notificationsPage = document.getElementById('notificationsPage'); // Changed from messagesPage
+    const chatPage = document.getElementById('chatPage');
+    const donationDetailPage = document.getElementById('donationDetailPage');
+    const settingsPage = document.getElementById('settingsPage');
+    const sidebar = document.getElementById('sidebar');
+    const donasiList = document.getElementById('donasiList');
+    const noResults = document.getElementById('noResults');
+    const searchBar = document.getElementById('searchBar');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const createDonationForm = document.getElementById('createDonationForm');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadBtnText = document.getElementById('uploadBtnText');
+    const uploadSpinner = document.getElementById('uploadSpinner');
+    const mediaUploadInput = document.getElementById('mediaUpload');
+    const mediaPreview = document.getElementById('mediaPreview');
+    const showMapBtn = document.getElementById('showMapBtn');
+    const mapContainer = document.getElementById('mapContainer');
+    const profileImage = document.getElementById('profileImage');
+    const onlineStatusDot = document.getElementById('onlineStatusDot');
+    const profileUsername = document.getElementById('profileUsername');
+    const profileBio = document.getElementById('profileBio');
+    const myDonationsList = document.getElementById('myDonationsList');
+    const noMyDonations = document.getElementById('noMyDonations'); // Corrected ID
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileForm = document.getElementById('editProfileForm');
+    const editProfileImage = document.getElementById('editProfileImage');
+    const newProfileImageInput = document.getElementById('newProfileImage');
+    const editUsernameInput = document.getElementById('editUsername');
+    const editBioInput = document.getElementById('editBio');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const notificationList = document.getElementById('notificationList'); // Changed from messageList
+    const noNotifications = document.getElementById('noNotifications'); // Changed from noMessages
+    const notificationFilters = document.querySelectorAll('.notification-filter'); // Changed from msgCategoryFilters
+    const backToNotificationsBtn = document.getElementById('backToNotificationsBtn'); // Changed from backToMessagesBtn
+    const chatPartnerAvatar = document.getElementById('chatPartnerAvatar');
+    const chatPartnerName = document.getElementById('chatPartnerName');
+    const chatDonationTitle = document.getElementById('chatDonationTitle');
+    const chatPartnerOnlineStatus = document.getElementById('chatPartnerOnlineStatus');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const emojiPickerBtn = document.getElementById('emojiPickerBtn');
+    const emojiPickerContainer = document.getElementById('emojiPickerContainer');
+    const donorActions = document.getElementById('donorActions');
+    const acceptRequestBtn = document.getElementById('acceptRequestBtn');
+    const rejectRequestBtn = document.getElementById('rejectRequestBtn');
+    const donationDetailContent = document.getElementById('donationDetailContent');
+    const backToHomeBtn = document.getElementById('backToHomeBtn');
+
+    let currentFilterCategory = 'all';
+    let currentNotificationType = 'all'; // Changed from currentMessageCategory
+
+    // --- Navigation and Page Switching ---
+    function showPage(pageId) {
+      document.querySelectorAll('section').forEach(page => {
+        page.classList.add('hidden');
+        page.classList.remove('active-page');
+      });
+      document.getElementById(pageId).classList.remove('hidden');
+      document.getElementById(pageId).classList.add('active-page');
+
+      // Show/hide homeHeader based on active page
+      if (pageId === 'homePage') {
+        homeHeader.classList.remove('hidden');
+      } else {
+        homeHeader.classList.add('hidden');
+      }
+
+      // Hide sidebar on mobile after navigation
+      if (window.innerWidth < 768) {
+        sidebar.classList.add('hidden');
+      }
+      // Scroll to top of content area on page change
+      contentArea.scrollTop = 0;
+    }
+
+    function handleHashChange() {
+      const hash = window.location.hash.substring(1);
+      if (hash === 'create-donation') {
+        showPage('createDonationPage');
+      } else if (hash === 'profile') {
+        showPage('profilePage');
+        loadMyDonations(currentUserId);
+        loadUserProfile(currentUserId);
+      } else if (hash === 'edit-profile') {
+        showPage('editProfilePage');
+        populateEditProfileForm(currentUserId);
+      } else if (hash === 'notifications') { // Changed from messages
+        showPage('notificationsPage');
+        loadNotifications(currentUserId, currentNotificationType); // Load notifications
+      } else if (hash.startsWith('chat-')) {
+        const chatId = hash.substring(5); // "chat-CHAT_ID"
+        showChatPage(chatId);
+      } else if (hash.startsWith('donation-')) { // Handle donation detail page
+        const donationId = hash.substring(9); // "donation-DONATION_ID"
+        showDonationDetail(donationId);
+      }
+       else if (hash === 'settings') {
+        showPage('settingsPage');
+      }
+       else {
+        showPage('homePage');
+        loadDonasi();
+      }
+    }
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.hash = e.currentTarget.getAttribute('href').substring(1);
+      });
+    });
+
+    // No messageIconBtn in header anymore, as messages are part of notifications page
+    // messageIconBtn.addEventListener('click', () => {
+    //     window.location.hash = 'messages';
+    // });
+
+    backToNotificationsBtn.addEventListener('click', () => { // Changed backToMessagesBtn
+        window.location.hash = 'notifications';
+    });
+
+    backToHomeBtn.addEventListener('click', () => {
+        window.location.hash = 'home';
+    });
+
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange(); // Initial load
+
+    // --- Firebase Data Loading and Display ---
+
+    function loadDonasi(searchTerm = '', category = 'all') {
+      let query = db.collection('donasi').orderBy('createdAt', 'desc');
+
+      if (category !== 'all') {
+        query = query.where('category', '==', category);
+      }
+
+      query.onSnapshot(snapshot => {
+        donasiList.innerHTML = '';
+        let hasResults = false;
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const donationId = doc.id;
+          const matchesSearch = searchTerm === '' ||
+                                data.judul.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                data.lokasi.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                data.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+          if (matchesSearch) {
+            hasResults = true;
+            const imageUrl = data.fotoUrls && data.fotoUrls.length > 0 ? data.fotoUrls[0] : 'https://via.placeholder.com/300x200?text=No+Image';
+
+            donasiList.innerHTML += `
+              <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg cursor-pointer donation-card" data-id="${donationId}">
+                <img src="${imageUrl}" alt="${data.judul}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                  <h3 class="font-bold text-xl md:text-2xl mb-1 text-gray-800">${data.judul}</h3>
+                  <p class="text-sm md:text-base text-gray-600 mb-2">${data.lokasi}</p>
+                  <span class="inline-block bg-indigo-100 text-indigo-800 text-xs md:text-sm font-semibold px-2.5 py-0.5 rounded-full">${data.category}</span>
+                  <div class="flex items-center justify-between mt-4">
+                      <div class="flex items-center gap-3 text-gray-600">
+                          <button class="vote-btn flex items-center gap-1 text-green-600 hover:text-green-800" data-type="upvote" data-id="${donationId}">
+                              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg>
+                              <span id="upvoteCount-${donationId}">${data.upvotes ? data.upvotes.length : 0}</span>
+                          </button>
+                          <button class="vote-btn flex items-center gap-1 text-red-600 hover:text-red-800" data-type="downvote" data-id="${donationId}">
+                              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg>
+                              <span id="downvoteCount-${donationId}">${data.downvotes ? data.downvotes.length : 0}</span>
+                          </button>
+                      </div>
+                      <div class="flex items-center gap-3">
+                          <button class="comment-btn text-gray-500 hover:text-gray-700" data-id="${donationId}">
+                              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                              </svg>
+                          </button>
+                          <button class="share-btn text-gray-500 hover:text-gray-700" data-id="${donationId}">
+                              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.882 13.07 9.283 13 9.683 13h4.634c.4 0 .702.07.9.342M17 14V10m0 0l-4-4m4 4l-4 4M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path>
+                              </svg>
+                          </button>
+                           <button class="chat-btn text-gray-500 hover:text-gray-700" data-id="${donationId}" data-donor-id="${data.donaturId}">
+                            <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        });
+
+        if (!hasResults) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+        addDonationCardListeners(); // Ensure this is called AFTER cards are added
+        addVoteListeners();
+        addCommentListeners();
+        addShareListeners();
+        addChatListeners();
+      });
+    }
+
+    // --- Search and Category Filtering ---
+    searchBar.addEventListener('keyup', (e) => {
+      const searchTerm = e.target.value;
+      loadDonasi(searchTerm, currentFilterCategory);
+    });
+
+    categoryFilters.forEach(button => {
+      button.addEventListener('click', (e) => {
+        categoryFilters.forEach(btn => {
+          btn.classList.remove('bg-indigo-500', 'text-white');
+          btn.classList.add('bg-gray-200', 'text-gray-700');
+        });
+        e.target.classList.remove('bg-gray-200', 'text-gray-700');
+        e.target.classList.add('bg-indigo-500', 'text-white');
+
+        currentFilterCategory = e.target.dataset.category;
+        loadDonasi(searchBar.value, currentFilterCategory);
+      });
+    });
+
+    // --- Donasi Detail & Interaction ---
+    function addDonationCardListeners() {
+      document.querySelectorAll('.donation-card').forEach(card => { // Changed selector
+        card.removeEventListener('click', handleDonationCardClick); // Prevent duplicate listeners
+        card.addEventListener('click', handleDonationCardClick);
+      });
+    }
+
+    function handleDonationCardClick(e) {
+        // Prevent opening detail page if a button inside the card was clicked
+        if (e.target.closest('button')) {
+            return;
+        }
+        const donationId = e.currentTarget.dataset.id;
+        window.location.hash = `donation-${donationId}`;
+    }
+
+    async function showDonationDetail(donationId) {
+        showPage('donationDetailPage');
+        donationDetailContent.innerHTML = '<p class="text-center text-gray-500 py-4">Memuat detail donasi...</p>';
+
+        try {
+            const donationDoc = await db.collection('donasi').doc(donationId).get();
+            if (!donationDoc.exists) {
+                donationDetailContent.innerHTML = '<p class="text-center text-red-500 py-4">Donasi tidak ditemukan.</p>';
+                return;
+            }
+
+            const data = donationDoc.data();
+            const donorDoc = await db.collection('users').doc(data.donaturId).get();
+            const donorUsername = donorDoc.exists ? (donorDoc.data().username || 'Pengguna Anonim') : 'Pengguna Anonim';
+            const donorProfilePic = donorDoc.exists ? (donorDoc.data().profilePhotoUrl || 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U') : 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U';
+            const isDonorOnline = donorDoc.exists && donorDoc.data().isOnline;
+
+            let mediaHtml = '';
+            if (data.fotoUrls && data.fotoUrls.length > 0) {
+                mediaHtml += `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">`;
+                data.fotoUrls.forEach(url => {
+                    mediaHtml += `<img src="${url}" alt="${data.judul}" class="w-full h-64 object-cover rounded-lg shadow-md">`;
+                });
+                mediaHtml += `</div>`;
+            }
+            if (data.videoUrls && data.videoUrls.length > 0) {
+                mediaHtml += `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">`;
+                data.videoUrls.forEach(url => {
+                    mediaHtml += `<video controls src="${url}" class="w-full h-64 object-cover rounded-lg shadow-md"></video>`;
+                });
+                mediaHtml += `</div>`;
+            }
+            if (!mediaHtml) {
+                mediaHtml = `<img src="https://via.placeholder.com/600x400?text=No+Media" alt="No media available" class="w-full h-64 object-cover rounded-lg shadow-md mb-6">`;
+            }
+
+            const upvotesCount = data.upvotes ? data.upvotes.length : 0;
+            const downvotesCount = data.downvotes ? data.downvotes.length : 0;
+            const createdAtDate = data.createdAt ? new Date(data.createdAt.toDate()).toLocaleString() : 'Tanggal tidak diketahui';
+
+
+            donationDetailContent.innerHTML = `
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">${data.judul}</h2>
+                <div class="flex items-center gap-4 mb-6 text-gray-600">
+                    <div class="relative">
+                        <img src="${donorProfilePic}" alt="Donatur Avatar" class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-indigo-400">
+                        <span class="absolute bottom-0 right-0 block w-3 h-3 md:w-4 md:h-4 rounded-full ${isDonorOnline ? 'bg-green-500' : 'bg-gray-400'} border border-white"></span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-lg md:text-xl text-gray-800">${donorUsername}</p>
+                        <p class="text-sm md:text-base">${createdAtDate}</p>
+                    </div>
+                </div>
+
+                ${mediaHtml}
+
+                <div class="flex items-center justify-around py-4 border-y border-gray-200 mb-6">
+                    <div class="flex items-center gap-1 text-green-600 text-lg md:text-xl">
+                        <svg class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg>
+                        <span id="upvoteCountDetail">${upvotesCount} Suka</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-red-600 text-lg md:text-xl">
+                        <svg class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg>
+                        <span id="downvoteCountDetail">${downvotesCount} Tidak Suka</span>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-3">Deskripsi Donasi</h3>
+                <p class="text-gray-700 leading-relaxed mb-6 text-base md:text-lg">${data.description}</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+                    <div>
+                        <p class="font-semibold text-gray-800 text-base md:text-lg">Kategori:</p>
+                        <span class="inline-block bg-indigo-100 text-indigo-800 text-sm md:text-base font-semibold px-3 py-1 rounded-full">${data.category}</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800 text-base md:text-lg">Kondisi:</p>
+                        <span class="inline-block bg-green-100 text-green-800 text-sm md:text-base font-semibold px-3 py-1 rounded-full">${data.condition}</span>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800 text-base md:text-lg">Lokasi:</p>
+                        <p class="text-gray-700 text-base md:text-lg">${data.lokasi}</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-gray-800 text-base md:text-lg">Kontak Donatur:</p>
+                        <p class="text-gray-700 text-base md:text-lg">${data.donorEmail} | ${data.donorPhone}</p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">Komentar</h3>
+                    <div id="detailCommentsList" class="max-h-60 overflow-y-auto mb-4 p-3 border rounded-lg bg-gray-50 text-base md:text-lg"></div>
+                    <textarea id="detailCommentInput" class="w-full p-3 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-base md:text-lg" rows="3" placeholder="Tulis komentar Anda..."></textarea>
+                    <button id="submitDetailCommentBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-full w-full transition-colors duration-200 text-base md:text-lg">Kirim Komentar</button>
+                </div>
+
+                ${data.donaturId !== currentUserId ? `
+                <div class="mt-8 text-center">
+                    <button id="requestDonationBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl shadow-lg transition-transform transform hover:scale-105">
+                        Ajukan Permintaan Donasi
+                    </button>
+                </div>
+                ` : `<p class="mt-8 text-center text-gray-600 font-semibold text-base md:text-lg">Ini adalah donasi Anda.</p>`}
+            `;
+
+            // Add functionality for voting, commenting, and requesting from detail page
+            const upvoteBtn = donationDetailContent.querySelector('.vote-btn[data-type="upvote"]');
+            const downvoteBtn = donationDetailContent.querySelector('.vote-btn[data-type="downvote"]');
+            const detailCommentsList = document.getElementById('detailCommentsList');
+            const detailCommentInput = document.getElementById('detailCommentInput');
+            const submitDetailCommentBtn = document.getElementById('submitDetailCommentBtn');
+            const requestDonationBtn = document.getElementById('requestDonationBtn');
+
+            // Re-apply vote listeners to the new buttons on the detail page
+            if (upvoteBtn) upvoteBtn.addEventListener('click', () => handleVote(donationId, 'upvote'));
+            if (downvoteBtn) downvoteBtn.addEventListener('click', () => handleVote(donationId, 'downvote'));
+
+
+            // Function to handle voting logic
+            async function handleVote(donationId, voteType) {
+                const donationRef = db.collection('donasi').doc(donationId);
+                if (!currentUserId) {
+                    alert('Anda harus masuk untuk memberikan suara.');
+                    return;
+                }
+                try {
+                    await db.runTransaction(async (transaction) => {
+                        const doc = await transaction.get(donationRef);
+                        if (!doc.exists) {
+                            throw "Dokumen donasi tidak ada!";
+                        }
+                        let upvotes = doc.data().upvotes || [];
+                        let downvotes = doc.data().downvotes || [];
+
+                        // Remove user's previous vote if any
+                        upvotes = upvotes.filter(id => id !== currentUserId);
+                        downvotes = downvotes.filter(id => id !== currentUserId);
+
+                        if (voteType === 'upvote') {
+                            upvotes.push(currentUserId);
+                        } else if (voteType === 'downvote') {
+                            downvotes.push(currentUserId);
+                        }
+                        transaction.update(donationRef, { upvotes, downvotes });
+                        // Update counts on the detail page immediately
+                        document.getElementById(`upvoteCountDetail`).textContent = upvotes.length;
+                        document.getElementById(`downvoteCountDetail`).textContent = downvotes.length;
+                    });
+                } catch (error) {
+                    console.error("Error voting:", error);
+                    alert("Gagal memberikan suara. Coba lagi.");
+                }
+            }
+            // Update vote counts dynamically after the initial render of detail page
+            db.collection('donasi').doc(donationId).onSnapshot(doc => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const upvotesCountElem = donationDetailContent.querySelector('.vote-btn[data-type="upvote"] span');
+                    const downvotesCountElem = donationDetailContent.querySelector('.vote-btn[data-type="downvote"] span');
+                    if (upvotesCountElem) upvotesCountElem.textContent = data.upvotes ? data.upvotes.length : 0;
+                    if (downvotesCountElem) downvotesCountElem.textContent = data.downvotes ? data.downvotes.length : 0;
+                }
+            });
+
+
+            // Load comments in real-time for detail page
+            db.collection('donasi').doc(donationId).collection('comments').orderBy('createdAt', 'asc').onSnapshot(snapshot => {
+                detailCommentsList.innerHTML = '';
+                if (snapshot.empty) {
+                    detailCommentsList.innerHTML = '<p class="text-gray-500 text-center py-4">Belum ada komentar.</p>';
+                }
+                snapshot.forEach(doc => {
+                    const comment = doc.data();
+                    detailCommentsList.innerHTML += `
+                        <div class="border-b last:border-b-0 py-2">
+                            <p class="font-bold text-sm md:text-base">${comment.username || 'Pengguna Anonim'}</p>
+                            <p class="text-gray-800 text-base md:text-lg">${comment.text}</p>
+                            <p class="text-gray-500 text-xs md:text-sm">${comment.createdAt ? new Date(comment.createdAt.toDate()).toLocaleString() : ''}</p>
+                        </div>
+                    `;
+                });
+                detailCommentsList.scrollTop = detailCommentsList.scrollHeight; // Scroll to bottom
+            });
+
+            // Submit comment for detail page
+            submitDetailCommentBtn.addEventListener('click', async () => {
+                const commentText = detailCommentInput.value.trim();
+                if (!currentUserId) {
+                    alert('Anda harus masuk untuk berkomentar.');
+                    return;
+                }
+                if (commentText) {
+                    try {
+                        const userDoc = await db.collection('users').doc(currentUserId).get();
+                        const username = userDoc.exists && userDoc.data().username ? userDoc.data().username : 'Pengguna Anonim';
+
+                        await db.collection('donasi').doc(donationId).collection('comments').add({
+                            userId: currentUserId,
+                            username: username,
+                            text: commentText,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        detailCommentInput.value = '';
+                    } catch (error) {
+                        console.error("Error adding comment:", error);
+                        alert("Gagal mengirim komentar.");
+                    }
+                }
+            });
+
+            // Request donation button functionality
+            if (requestDonationBtn) {
+                requestDonationBtn.addEventListener('click', async () => {
+                    if (!currentUserId) {
+                        alert('Anda harus masuk untuk mengajukan permintaan.');
+                        return;
+                    }
+                    if (currentUserId === data.donaturId) {
+                        alert('Anda tidak bisa mengajukan permintaan untuk donasi Anda sendiri.');
+                        return;
+                    }
+                    // Implement logic to initiate chat or formal request
+                    const confirmRequest = confirm('Apakah Anda yakin ingin mengajukan permintaan untuk donasi ini? Ini akan membuka chat dengan donatur.');
+                    if (confirmRequest) {
+                        try {
+                            // Find or create chat (similar to chat-btn logic)
+                            let chatId = null;
+                            const chatsRef = db.collection('chats');
+                            const query1 = await chatsRef.where('donationId', '==', donationId)
+                                                        .where('participants', 'array-contains', currentUserId)
+                                                        .get();
+
+                            if (!query1.empty) {
+                                chatId = query1.docs[0].id;
+                            } else {
+                                const newChatRef = await chatsRef.add({
+                                    donationId: donationId,
+                                    participants: [currentUserId, data.donaturId],
+                                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                    lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
+                                });
+                                chatId = newChatRef.id;
+                            }
+
+                            // Add a notification for the donor
+                            await db.collection('users').doc(data.donaturId).collection('notifications').add({
+                                type: 'donation_request',
+                                fromUserId: currentUserId,
+                                donationId: donationId,
+                                chatId: chatId,
+                                message: `Pengguna ${currentUserId.substring(0,4)} mengajukan permintaan untuk donasi '${data.judul}'.`,
+                                read: false,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+
+                            alert('Permintaan Anda telah diajukan! Anda akan diarahkan ke obrolan dengan donatur.');
+                            window.location.hash = `chat-${chatId}`;
+
+                        } catch (error) {
+                            console.error("Error initiating donation request/chat:", error);
+                            alert("Gagal mengajukan permintaan. Coba lagi.");
+                        }
+                    }
+                });
+            }
+
+        } catch (error) {
+            console.error("Error loading donation detail:", error);
+            donationDetailContent.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat detail donasi.</p>';
+        }
+    }
+
+
+    // --- Voting System ---
+    function addVoteListeners() {
+        document.querySelectorAll('.vote-btn').forEach(button => {
+            button.removeEventListener('click', handleVoteClick); // Prevent duplicate listeners
+            button.addEventListener('click', handleVoteClick);
+        });
+    }
+
+    async function handleVoteClick(e) {
+        const donationId = e.currentTarget.dataset.id;
+        const voteType = e.currentTarget.dataset.type;
+        const donationRef = db.collection('donasi').doc(donationId);
+
+        if (!currentUserId) {
+            alert('Anda harus masuk untuk memberikan suara.');
+            return;
+        }
+
+        try {
+            await db.runTransaction(async (transaction) => {
+                const doc = await transaction.get(donationRef);
+                if (!doc.exists) {
+                    throw "Dokumen donasi tidak ada!";
+                }
+
+                let upvotes = doc.data().upvotes || [];
+                let downvotes = doc.data().downvotes || [];
+
+                // Remove user's previous vote if any
+                upvotes = upvotes.filter(id => id !== currentUserId);
+                downvotes = downvotes.filter(id => id !== currentUserId);
+
+                if (voteType === 'upvote') {
+                    upvotes.push(currentUserId);
+                } else if (voteType === 'downvote') {
+                    downvotes.push(currentUserId);
+                }
+
+                transaction.update(donationRef, { upvotes, downvotes });
+            });
+        } catch (error) {
+            console.error("Error voting:", error);
+            alert("Gagal memberikan suara. Coba lagi.");
+        }
+    }
+
+    // --- Comment System (for Home Page Cards) ---
+    function addCommentListeners() {
+        document.querySelectorAll('.comment-btn').forEach(button => {
+            button.removeEventListener('click', handleCommentButtonClick); // Prevent duplicate listeners
+            button.addEventListener('click', handleCommentButtonClick);
+        });
+    }
+
+    async function handleCommentButtonClick(e) {
+        const donationId = e.currentTarget.dataset.id;
+        openCommentModal(donationId);
+    }
+
+    async function openCommentModal(donationId) {
+        if (!currentUserId) {
+            alert('Anda harus masuk untuk berkomentar.');
+            return;
+        }
+
+        modalTitle.textContent = 'Komentar';
+        modalBody.innerHTML = `
+            <div id="commentsList" class="max-h-80 overflow-y-auto mb-4 p-2 border rounded text-base md:text-lg"></div>
+            <textarea id="commentInput" class="w-full p-2 border rounded mb-2 text-base md:text-lg" rows="3" placeholder="Tulis komentar Anda..."></textarea>
+            <button id="submitCommentBtn" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full text-base md:text-lg">Kirim Komentar</button>
+        `;
+        modal.classList.remove('hidden');
+
+        const commentsList = document.getElementById('commentsList');
+        const commentInput = document.getElementById('commentInput');
+        const submitCommentBtn = document.getElementById('submitCommentBtn');
+
+        db.collection('donasi').doc(donationId).collection('comments').orderBy('createdAt', 'asc').onSnapshot(snapshot => {
+            commentsList.innerHTML = '';
+            if (snapshot.empty) {
+                commentsList.innerHTML = '<p class="text-gray-500 text-center">Belum ada komentar.</p>';
+            }
+            snapshot.forEach(doc => {
+                const comment = doc.data();
+                commentsList.innerHTML += `
+                    <div class="border-b last:border-b-0 py-2">
+                        <p class="font-bold text-sm md:text-base">${comment.username || 'Pengguna Anonim'}</p>
+                        <p class="text-gray-800 text-base md:text-lg">${comment.text}</p>
+                        <p class="text-gray-500 text-xs md:text-sm">${comment.createdAt ? new Date(comment.createdAt.toDate()).toLocaleString() : ''}</p>
+                    </div>
+                `;
+            });
+            commentsList.scrollTop = commentsList.scrollHeight;
+        });
+
+        submitCommentBtn.addEventListener('click', async () => {
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+                try {
+                    const userDoc = await db.collection('users').doc(currentUserId).get();
+                    const username = userDoc.exists && userDoc.data().username ? userDoc.data().username : 'Pengguna Anonim';
+
+                    await db.collection('donasi').doc(donationId).collection('comments').add({
+                        userId: currentUserId,
+                        username: username,
+                        text: commentText,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    commentInput.value = '';
+                } catch (error) {
+                    console.error("Error adding comment:", error);
+                    alert("Gagal mengirim komentar.");
+                }
+            }
+        });
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        modalBody.innerHTML = '';
+    });
+
+    // --- Share Functionality ---
+    function addShareListeners() {
+        document.querySelectorAll('.share-btn').forEach(button => {
+            button.removeEventListener('click', handleShareClick); // Prevent duplicate listeners
+            button.addEventListener('click', handleShareClick);
+        });
+    }
+
+    async function handleShareClick(e) {
+        const donationId = e.currentTarget.dataset.id;
+        const shareUrl = `${window.location.origin}/#donation-${donationId}`; // Link to detail page
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Cek donasi ini!',
+                    text: 'Lihat barang bekas yang bisa didonasikan:',
+                    url: shareUrl,
+                });
+                console.log('Donasi dibagikan.');
+            } catch (error) {
+                console.error('Gagal berbagi:', error);
+            }
+        } else {
+            prompt("Anda bisa membagikan link ini:", shareUrl);
+            console.log('Web Share API not supported, fallback to copy/paste.');
+        }
+    }
+
+    // --- Chat Functionality (Integrated with Notifications Page) ---
+    function addChatListeners() {
+        document.querySelectorAll('.chat-btn').forEach(button => {
+            button.removeEventListener('click', handleChatClick); // Prevent duplicate listeners
+            button.addEventListener('click', handleChatClick);
+        });
+    }
+
+    async function handleChatClick(e) {
+        const donationId = e.currentTarget.dataset.id;
+        const donaturId = e.currentTarget.dataset.donorId;
+
+        if (!currentUserId) {
+            alert('Anda harus masuk untuk memulai chat.');
+            return;
+        }
+        if (currentUserId === donaturId) {
+            alert('Anda tidak bisa chat dengan diri sendiri.');
+            return;
+        }
+
+        try {
+            // Find or create chat
+            let chatId = null;
+            const chatsRef = db.collection('chats');
+            const query1 = await chatsRef.where('donationId', '==', donationId)
+                                        .where('participants', 'array-contains', currentUserId)
+                                        .get();
+
+            if (!query1.empty) {
+                // Check if a chat already exists involving *both* participants for this donation
+                const existingChatDocs = query1.docs.filter(doc => doc.data().participants.includes(donaturId));
+                if (existingChatDocs.length > 0) {
+                    chatId = existingChatDocs[0].id;
+                }
+            }
+
+            if (!chatId) { // If no existing chat found with both participants
+                const newChatRef = await chatsRef.add({
+                    donationId: donationId,
+                    participants: [currentUserId, donaturId],
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                chatId = newChatRef.id;
+
+                // Add notification for the recipient about new chat
+                await db.collection('users').doc(donaturId).collection('notifications').add({
+                    type: 'new_chat',
+                    fromUserId: currentUserId,
+                    donationId: donationId,
+                    chatId: chatId,
+                    message: `Anda punya pesan chat baru terkait donasi '${(await db.collection('donasi').doc(donationId).get()).data().judul}'.`,
+                    read: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }
+            window.location.hash = `chat-${chatId}`;
+
+        } catch (error) {
+            console.error("Error starting chat:", error);
+            alert("Gagal memulai chat. Coba lagi.");
+        }
+    }
+
+
+    // Load notifications for Notifications Page
+    async function loadNotifications(uid, typeFilter = 'all') {
+        notificationList.innerHTML = '<p class="text-center text-gray-500 py-4">Memuat notifikasi...</p>';
+        if (!uid) {
+            notificationList.innerHTML = '<p class="text-center text-gray-500 py-4">Mohon login untuk melihat notifikasi Anda.</p>';
+            return;
+        }
+
+        try {
+            let notificationsQuery = db.collection('users').doc(uid).collection('notifications').orderBy('createdAt', 'desc');
+
+            const snapshot = await notificationsQuery.get();
+            notificationList.innerHTML = '';
+            if (snapshot.empty) {
+                noNotifications.classList.remove('hidden');
+                return;
+            }
+            noNotifications.classList.add('hidden');
+
+            for (const doc of snapshot.docs) {
+                const notification = doc.data();
+                const notificationId = doc.id;
+                let display = true;
+
+                if (typeFilter !== 'all') {
+                    if (typeFilter === 'unread' && notification.read) {
+                        display = false;
+                    } else if (typeFilter === 'chats' && notification.type !== 'new_chat') {
+                        display = false;
+                    } else if (typeFilter === 'requests' && notification.type !== 'donation_request') {
+                        display = false;
+                    }
+                }
+
+                if (display) {
+                    let fromUsername = 'Pengguna Tak Dikenal';
+                    let fromUserAvatar = 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U';
+                    if (notification.fromUserId) {
+                        const fromUserDoc = await db.collection('users').doc(notification.fromUserId).get();
+                        if (fromUserDoc.exists) {
+                            fromUsername = fromUserDoc.data().username || 'Pengguna Tak Dikenal';
+                            fromUserAvatar = fromUserDoc.data().profilePhotoUrl || 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U';
+                        }
+                    }
+
+                    let notificationAction = '';
+                    let notificationIcon = '';
+                    let actionUrl = '';
+
+                    if (notification.type === 'new_chat' && notification.chatId) {
+                        notificationIcon = `<svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>`;
+                        notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Buka Chat</button>`;
+                        actionUrl = `#chat-${notification.chatId}`;
+                    } else if (notification.type === 'donation_request' && notification.chatId) {
+                        notificationIcon = `<svg class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                        notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Tanggapi Permintaan</button>`;
+                        actionUrl = `#chat-${notification.chatId}`;
+                    } else {
+                        notificationIcon = `<svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                    }
+
+
+                    notificationList.innerHTML += `
+                        <div class="bg-gray-50 p-4 rounded-lg flex items-center gap-4 transition-colors cursor-pointer notification-item ${notification.read ? 'opacity-70' : 'bg-blue-50 hover:bg-blue-100'}" data-notification-id="${notificationId}" data-action-url="${actionUrl}">
+                            <img src="${fromUserAvatar}" alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
+                            ${notificationIcon}
+                            <div class="flex-grow">
+                                <p class="font-bold text-gray-800 text-base md:text-lg">${notification.message}</p>
+                                <p class="text-sm text-gray-600">${fromUsername} &bull; ${notification.createdAt ? new Date(notification.createdAt.toDate()).toLocaleString() : ''}</p>
+                            </div>
+                            <button class="mark-read-btn text-gray-500 hover:text-gray-700 ml-auto" data-notification-id="${notificationId}">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+            addNotificationListeners();
+        } catch (error) {
+            console.error("Error loading notifications:", error);
+            notificationList.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat notifikasi.</p>';
+        }
+    }
+
+    function addNotificationListeners() {
+        document.querySelectorAll('.notification-item').forEach(item => {
+            item.removeEventListener('click', handleNotificationClick);
+            item.addEventListener('click', handleNotificationClick);
+        });
+        document.querySelectorAll('.mark-read-btn').forEach(button => {
+            button.removeEventListener('click', markNotificationAsRead);
+            button.addEventListener('click', markNotificationAsRead);
+        });
+        document.querySelectorAll('.open-chat-btn').forEach(button => {
+            button.removeEventListener('click', handleOpenChatFromNotification);
+            button.addEventListener('click', handleOpenChatFromNotification);
+        });
+    }
+
+    async function handleNotificationClick(e) {
+        // Prevent click on parent if a button inside was clicked
+        if (e.target.closest('button')) {
+            return;
+        }
+        const notificationId = e.currentTarget.dataset.notificationId;
+        const actionUrl = e.currentTarget.dataset.actionUrl;
+
+        await db.collection('users').doc(currentUserId).collection('notifications').doc(notificationId).update({ read: true });
+
+        if (actionUrl && actionUrl.startsWith('#')) {
+            window.location.hash = actionUrl.substring(1);
+        }
+    }
+
+    async function markNotificationAsRead(e) {
+        e.stopPropagation(); // Prevent parent notification item click
+        const notificationId = e.currentTarget.dataset.notificationId;
+        try {
+            await db.collection('users').doc(currentUserId).collection('notifications').doc(notificationId).update({ read: true });
+            alert('Notifikasi ditandai sebagai sudah dibaca.');
+        } catch (error) {
+            console.error("Error marking notification as read:", error);
+        }
+    }
+
+    function handleOpenChatFromNotification(e) {
+        e.stopPropagation(); // Prevent parent notification item click
+        const chatId = e.currentTarget.dataset.chatId;
+        const notificationId = e.currentTarget.dataset.notificationId;
+        db.collection('users').doc(currentUserId).collection('notifications').doc(notificationId).update({ read: true });
+        window.location.hash = `chat-${chatId}`;
+    }
+
+
+    notificationFilters.forEach(button => {
+        button.addEventListener('click', (e) => {
+            notificationFilters.forEach(btn => {
+                btn.classList.remove('bg-indigo-500', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            e.target.classList.remove('bg-gray-200', 'text-gray-700');
+            e.target.classList.add('bg-indigo-500', 'text-white');
+
+            currentNotificationType = e.target.dataset.notificationType;
+            loadNotifications(currentUserId, currentNotificationType);
+        });
+    });
+
+
+    async function showChatPage(chatId) {
+        showPage('chatPage');
+        chatMessages.innerHTML = '<p class="text-center text-gray-500 py-4">Memuat pesan chat...</p>';
+        chatInput.value = '';
+        donorActions.classList.add('hidden'); // Hide by default
+
+        try {
+            const chatRef = db.collection('chats').doc(chatId);
+            const chatDoc = await chatRef.get();
+
+            if (!chatDoc.exists) {
+                chatMessages.innerHTML = '<p class="text-center text-red-500 py-4">Chat tidak ditemukan.</p>';
+                return;
+            }
+
+            const chatData = chatDoc.data();
+            const otherParticipantId = chatData.participants.find(p => p !== currentUserId);
+
+            // Get chat partner info and listen for online status changes
+            db.collection('users').doc(otherParticipantId).onSnapshot(doc => {
+                const userData = doc.data();
+                const chatPartnerNameText = userData ? (userData.username || 'Pengguna Tak Dikenal') : 'Pengguna Tak Dikenal';
+                const chatPartnerAvatarSrc = userData ? (userData.profilePhotoUrl || 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U') : 'https://via.placeholder.com/50/CCCCCC/FFFFFF?text=U';
+                const isOnline = userData ? userData.isOnline : false;
+
+                chatPartnerName.textContent = chatPartnerNameText;
+                chatPartnerAvatar.src = chatPartnerAvatarSrc;
+                if (isOnline) {
+                    chatPartnerOnlineStatus.classList.remove('bg-gray-400');
+                    chatPartnerOnlineStatus.classList.add('bg-green-500');
+                } else {
+                    chatPartnerOnlineStatus.classList.remove('bg-green-500');
+                    chatPartnerOnlineStatus.classList.add('bg-gray-400');
+                }
+            });
+
+
+            // Get donation info for header
+            let donationTitleText = "Donasi Tidak Diketahui";
+            if (chatData.donationId) {
+                const donationDoc = await db.collection('donasi').doc(chatData.donationId).get();
+                if (donationDoc.exists) {
+                    donationTitleText = donationDoc.data().judul;
+                }
+            }
+            chatDonationTitle.textContent = `Donasi: ${donationTitleText}`;
+
+            // Show donor actions if current user is the donor of this chat's donation
+            const donationSnapshot = await db.collection('donasi').doc(chatData.donationId).get();
+            if (donationSnapshot.exists && donationSnapshot.data().donaturId === currentUserId) {
+                donorActions.classList.remove('hidden');
+            }
+
+
+            // Load messages in real-time
+            chatRef.collection('messages').orderBy('createdAt', 'asc').onSnapshot(snapshot => {
+                chatMessages.innerHTML = '';
+                snapshot.forEach(msgDoc => {
+                    const msgData = msgDoc.data();
+                    const isCurrentUser = msgData.senderId === currentUserId;
+                    const messageClass = isCurrentUser ? 'justify-end' : 'justify-start';
+                    const bubbleClass = isCurrentUser ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800';
+                    chatMessages.innerHTML += `
+                        <div class="flex ${messageClass}">
+                            <div class="${bubbleClass} p-3 rounded-lg max-w-xs md:max-w-md break-words text-base md:text-lg">
+                                ${msgData.text}
+                                <span class="block text-xs md:text-sm mt-1 ${isCurrentUser ? 'text-indigo-100' : 'text-gray-500'}">${msgData.createdAt ? new Date(msgData.createdAt.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ''}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+            });
+
+            // Send message listener
+            sendMessageBtn.onclick = async () => {
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                    await chatRef.collection('messages').add({
+                        senderId: currentUserId,
+                        text: messageText,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    chatRef.update({
+                        lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    // Add a notification for the recipient about new message
+                    await db.collection('users').doc(otherParticipantId).collection('notifications').add({
+                        type: 'new_message',
+                        fromUserId: currentUserId,
+                        chatId: chatId,
+                        message: `Pesan baru dari ${currentUserId.substring(0,4)}: '${messageText}'`,
+                        read: false,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    chatInput.value = '';
+                }
+            };
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessageBtn.click();
+                }
+            });
+
+            // Emoji Picker
+            emojiPickerBtn.addEventListener('click', (e) => {
+                emojiPickerContainer.classList.toggle('hidden');
+            });
+
+            document.querySelector('emoji-picker').addEventListener('emoji-click', event => {
+                chatInput.value += event.detail.unicode;
+                chatInput.focus();
+                emojiPickerContainer.classList.add('hidden'); // Hide after selection
+            });
+
+            // Hide emoji picker if click outside
+            document.addEventListener('click', (e) => {
+                if (!emojiPickerContainer.contains(e.target) && e.target !== emojiPickerBtn) {
+                    emojiPickerContainer.classList.add('hidden');
+                }
+            });
+
+
+            // Donor actions listeners
+            acceptRequestBtn.onclick = async () => {
+                if (confirm('Terima permintaan ini? Donasi akan dihapus.')) {
+                    // Mark associated notifications as read
+                    const notificationsForChat = await db.collection('users').doc(currentUserId).collection('notifications')
+                                                        .where('chatId', '==', chatId).get();
+                    notificationsForChat.forEach(async notifDoc => {
+                        await notifDoc.ref.update({ read: true });
+                    });
+
+                    await db.collection('donasi').doc(chatData.donationId).delete();
+                    alert('Permintaan diterima. Donasi telah dihapus.');
+                    // Add notification for the requester that their request was accepted
+                    await db.collection('users').doc(otherParticipantId).collection('notifications').add({
+                        type: 'request_accepted',
+                        fromUserId: currentUserId,
+                        donationId: chatData.donationId,
+                        chatId: chatId,
+                        message: `Permintaan Anda untuk donasi '${donationTitleText}' telah DITERIMA!`,
+                        read: false,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                    window.location.hash = 'notifications'; // Go back to messages
+                }
+            };
+
+            rejectRequestBtn.onclick = async () => {
+                 if (confirm('Tolak permintaan ini? Chat ini mungkin akan dihapus atau diarsipkan.')) {
+                    // Mark associated notifications as read
+                    const notificationsForChat = await db.collection('users').doc(currentUserId).collection('notifications')
+                                                        .where('chatId', '==', chatId).get();
+                    notificationsForChat.forEach(async notifDoc => {
+                        await notifDoc.ref.update({ read: true });
+                    });
+
+                    alert('Permintaan ditolak.');
+                    // Add notification for the requester that their request was rejected
+                    await db.collection('users').doc(otherParticipantId).collection('notifications').add({
+                        type: 'request_rejected',
+                        fromUserId: currentUserId,
+                        donationId: chatData.donationId,
+                        chatId: chatId,
+                        message: `Permintaan Anda untuk donasi '${donationTitleText}' telah DITOLAK.`,
+                        read: false,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    // You might consider deleting the chat or marking it as 'rejected'
+                    // await db.collection('chats').doc(chatId).delete();
+                    window.location.hash = 'notifications';
+                 }
+            };
+
+        } catch (error) {
+            console.error("Error loading chat:", error);
+            chatMessages.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat chat.</p>';
+        }
+    }
+
+
+    // --- Upload file ke Cloudinary ---
+    async function uploadToCloudinary(file) {
+      if (!file) return null;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'upload_video_user'); // Ganti dengan Upload Preset Anda
+
+      try {
+        const res = await fetch('https://api.cloudinary.com/v1_1/dl6iyeqrc/auto/upload', { // Ganti dengan Cloud Name Anda
+          method: 'POST',
+          body: formData
+        });
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(`Cloudinary upload failed: ${errorData.error.message}`);
+        }
+        const data = await res.json();
+        return data.secure_url;
+      } catch (error) {
+        console.error("Error uploading to Cloudinary:", error);
+        alert("Gagal mengunggah file. Pastikan Cloudinary Anda dikonfigurasi dengan benar.");
+        return null;
+      }
+    }
+
+    // --- Simpan Donasi Baru ---
+    createDonationForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      uploadBtn.disabled = true;
+      uploadBtnText.classList.add('hidden');
+      uploadSpinner.classList.remove('hidden');
+
+      const title = document.getElementById('donationTitle').value;
+      const description = document.getElementById('donationDescription').value;
+      const name = document.getElementById('donorName').value;
+      const email = document.getElementById('donorEmail').value;
+      const phone = document.getElementById('donorPhone').value;
+      const condition = document.querySelector('input[name="condition"]:checked')?.value;
+      const category = document.getElementById('category').value;
+      const address = document.getElementById('donationAddress').value;
+      const mediaFiles = mediaUploadInput.files;
+
+      if (!condition) {
+          alert("Mohon pilih kondisi barang.");
+          uploadBtn.disabled = false;
+          uploadBtnText.classList.remove('hidden');
+          uploadSpinner.classList.add('hidden');
+          return;
+      }
+
+      const uploadedUrls = [];
+      if (mediaFiles.length > 0) {
+        for (const file of mediaFiles) {
+          const url = await uploadToCloudinary(file);
+          if (url) {
+            uploadedUrls.push(url);
+          }
+        }
+      }
+
+      try {
+        await db.collection('donasi').add({
+          judul: title,
+          description: description,
+          donorName: name,
+          donorEmail: email,
+          donorPhone: phone,
+          condition: condition,
+          category: category,
+          lokasi: address,
+          fotoUrls: uploadedUrls.filter(url => url.match(/\.(jpeg|jpg|png|gif)$/i)),
+          videoUrls: uploadedUrls.filter(url => url.match(/\.(mp4|mov|avi)$/i)),
+          donaturId: currentUserId,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          upvotes: [],
+          downvotes: []
+        });
+
+        alert('Donasi berhasil diupload!');
+        createDonationForm.reset();
+        mediaPreview.innerHTML = '';
+        window.location.hash = 'home'; // Navigate to home page
+      } catch (error) {
+        console.error("Error saving donation:", error);
+        alert("Gagal menyimpan donasi. Coba lagi.");
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtnText.classList.remove('hidden');
+        uploadSpinner.classList.add('hidden');
+      }
+    });
+
+    // --- Media File Preview ---
+    mediaUploadInput.addEventListener('change', (e) => {
+        mediaPreview.innerHTML = '';
+        const files = e.target.files;
+        if (files.length > 5) {
+            alert('Maksimal 5 gambar/video yang bisa diunggah.');
+            mediaUploadInput.value = '';
+            return;
+        }
+
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'relative group';
+
+                if (file.type.startsWith('image/')) {
+                    imgContainer.innerHTML = `
+                        <img src="${e.target.result}" class="w-24 h-24 object-cover rounded-md border border-gray-200">
+                    `;
+                } else if (file.type.startsWith('video/')) {
+                    imgContainer.innerHTML = `
+                        <video src="${e.target.result}" class="w-24 h-24 object-cover rounded-md border border-gray-200"></video>
+                        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-1"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
+                    `;
+                }
+                mediaPreview.appendChild(imgContainer);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    // --- Google Maps Integration (Placeholder) ---
+    showMapBtn.addEventListener('click', () => {
+        const address = document.getElementById('donationAddress').value;
+        if (address) {
+            mapContainer.classList.remove('hidden');
+            mapContainer.innerHTML = `<p class="text-center text-gray-500 py-8 text-base md:text-lg">Memuat peta untuk: ${address} (Implementasi Google Maps API diperlukan)</p>`;
+        } else {
+            alert('Mohon masukkan alamat terlebih dahulu.');
+        }
+    });
+
+    // --- Profile Page Functions ---
+    async function loadUserProfile(uid) {
+        if (!uid) return;
+        try {
+            const userDoc = await db.collection('users').doc(uid).get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                profileUsername.textContent = userData.username || 'Pengguna Anonim';
+                profileBio.textContent = userData.bio || 'Tulis bio Anda di sini.';
+                if (userData.profilePhotoUrl) {
+                    profileImage.src = userData.profilePhotoUrl;
+                }
+                // Update online status dot
+                if (userData.isOnline) {
+                    onlineStatusDot.classList.remove('bg-gray-400');
+                    onlineStatusDot.classList.add('bg-green-500');
+                } else {
+                    onlineStatusDot.classList.remove('bg-green-500');
+                    onlineStatusDot.classList.add('bg-gray-400');
+                }
+            }
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    async function loadMyDonations(uid) {
+        if (!uid) {
+            myDonationsList.innerHTML = '<p class="text-center text-gray-500 text-base md:text-lg">Mohon login untuk melihat donasi Anda.</p>';
+            return;
+        }
+
+        db.collection('donasi').where('donaturId', '==', uid).orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+            myDonationsList.innerHTML = '';
+            let hasMyDonations = false;
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const donationId = doc.id;
+                hasMyDonations = true;
+                const imageUrl = data.fotoUrls && data.fotoUrls.length > 0 ? data.fotoUrls[0] : 'https://via.placeholder.com/300x200?text=No+Image';
+
+                myDonationsList.innerHTML += `
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
+                        <img src="${imageUrl}" alt="${data.judul}" class="w-full h-32 object-cover">
+                        <div class="p-3">
+                            <h4 class="font-bold text-lg md:text-xl mb-1">${data.judul}</h4>
+                            <p class="text-sm md:text-base text-gray-600 mb-2">${data.lokasi}</p>
+                            <span class="inline-block bg-indigo-100 text-indigo-800 text-xs md:text-sm font-semibold px-2.5 py-0.5 rounded-full">${data.category}</span>
+                            <div class="mt-3 flex gap-2">
+                                <button class="view-my-donation-btn bg-blue-500 hover:bg-blue-600 text-white text-sm md:text-base px-3 py-1 rounded-full" data-donation-id="${donationId}">Lihat</button>
+                                <button class="delete-my-donation-btn bg-red-500 hover:bg-red-600 text-white text-sm md:text-base px-3 py-1 rounded-full" data-donation-id="${donationId}">Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            if (!hasMyDonations) {
+                noMyDonations.classList.remove('hidden');
+            } else {
+                noMyDonations.classList.add('hidden');
+            }
+             document.querySelectorAll('.delete-my-donation-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const donationId = e.currentTarget.dataset.donationId;
+                    if (confirm('Apakah Anda yakin ingin menghapus donasi ini?')) {
+                        try {
+                            await db.collection('donasi').doc(donationId).delete();
+                            alert('Donasi berhasil dihapus.');
+                        } catch (error) {
+                            console.error("Error deleting donation:", error);
+                            alert('Gagal menghapus donasi.');
+                        }
+                    }
+                });
+            });
+            document.querySelectorAll('.view-my-donation-btn').forEach(button => { // New: View button for my donations
+                button.addEventListener('click', (e) => {
+                    const donationId = e.currentTarget.dataset.donationId;
+                    window.location.hash = `donation-${donationId}`;
+                });
+            });
+        });
+    }
+
+    // Edit Profile related functions
+    editProfileBtn.addEventListener('click', () => {
+        window.location.hash = 'edit-profile';
+    });
+
+    async function populateEditProfileForm(uid) {
+        if (!uid) return;
+        try {
+            const userDoc = await db.collection('users').doc(uid).get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                editUsernameInput.value = userData.username || '';
+                editBioInput.value = userData.bio || '';
+                if (userData.profilePhotoUrl) {
+                    editProfileImage.src = userData.profilePhotoUrl;
+                }
+            }
+        } catch (error) {
+            console.error("Error populating edit profile form:", error);
+        }
+    }
+
+    newProfileImageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                editProfileImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    editProfileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!currentUserId) {
+            alert('Anda harus login untuk mengedit profil.');
+            return;
+        }
+
+        const newUsername = editUsernameInput.value.trim();
+        const newBio = editBioInput.value.trim();
+        const profileFile = newProfileImageInput.files[0];
+
+        if (!newUsername) {
+            alert('Username tidak boleh kosong.');
+            return;
+        }
+
+        let profilePhotoUrl = editProfileImage.src; // Keep current if not changed
+
+        if (profileFile) {
+            const uploadSpinner = document.createElement('span');
+            uploadSpinner.className = 'animate-spin h-5 w-5 border-4 border-white border-t-transparent rounded-full ml-2';
+            e.target.querySelector('button[type="submit"]').appendChild(uploadSpinner);
+            e.target.querySelector('button[type="submit"]').disabled = true;
+
+            profilePhotoUrl = await uploadToCloudinary(profileFile);
+            if (!profilePhotoUrl) {
+                alert('Gagal mengunggah foto profil.');
+                e.target.querySelector('button[type="submit"]').disabled = false;
+                uploadSpinner.remove();
+                return;
+            }
+        }
+
+        try {
+            await db.collection('users').doc(currentUserId).update({
+                username: newUsername,
+                bio: newBio,
+                profilePhotoUrl: profilePhotoUrl
+            });
+            alert('Profil berhasil diperbarui!');
+            window.location.hash = 'profile'; // Go back to profile page
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            alert("Gagal memperbarui profil. Coba lagi.");
+        } finally {
+            e.target.querySelector('button[type="submit"]').disabled = false;
+            const spinner = e.target.querySelector('button[type="submit"] span');
+            if (spinner) spinner.remove();
+        }
+    });
+
+    // --- Logout ---
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', async () => {
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            try {
+                // Set offline status before signing out
+                if (currentUserId) {
+                    await db.collection('users').doc(currentUserId).update({
+                        isOnline: false,
+                        lastOnline: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+                await auth.signOut();
+                currentUserId = null;
+                alert('Anda telah logout.');
+                window.location.reload();
+            } catch (error) {
+                console.error("Error logging out:", error);
+                alert("Gagal logout. Coba lagi.");
+            }
+        }
+    });
+  </script>
+</body>
+</html>
