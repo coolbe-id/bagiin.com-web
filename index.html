@@ -2,18 +2,16 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="https://i.ibb.co/20xH6jNt/file-0000000058d461f4889847d3895cf682.png" />
-  
-<!-- Open Graph / Facebook -->
+
+<meta name="google-site-verification" content="zIb4CdzLMpnitD8HRoGHQ3VQ2XLhmaOB2LB4l7mHfEk" />
 <meta property="og:title" content="Bagiin - Berbagi Bersama" />
 <meta property="og:description" content="Gabung dan bagikan barang bermanfaat bersama Bagiin." />
 <meta property="og:image" content="https://i.ibb.co/2f9BTCr/file-0000000025a861f68595d2f76bf9b51e.png" />
 <meta property="og:url" content="https://bagiin.com" />
 <meta property="og:type" content="website" />
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Bagiin - Berbagi Bersama" />
 <meta name="twitter:description" content="Gabung dan bagikan barang bermanfaat bersama Bagiin." />
@@ -32,7 +30,7 @@
 <body class="bg-white text-black font-sans">
   <div class="flex h-screen overflow-hidden">
     <aside id="sidebar" class="hidden md:flex md:flex-col w-64 bg-black text-white p-4 rounded-r-2xl shadow-lg">
-      <h1 class="text-3xl font-extrabold mb-8 text-indigo-400">Donasi</h1>
+      <h1 class="text-3xl font-extrabold mb-8 text-indigo-400">Bagiin</h1>
       <nav class="flex flex-col gap-5 text-lg">
         <a href="#home" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
           <svg class="h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -53,9 +51,12 @@
           Profil
         </a>
         <a href="#notifications" class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-800 transition-colors duration-200">
-            <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
+            <div class="relative">
+                <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                </svg>
+                <span id="sidebarNotificationCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+            </div>
             Notifikasi
         </a>
         <div class="mt-auto pt-8">
@@ -73,19 +74,27 @@
     <div class="flex-1 flex flex-col bg-gray-50 overflow-y-auto pb-16 md:pb-0"> <header id="homeHeader" class="flex justify-between items-center border-b p-4 bg-white shadow-sm sticky top-0 z-10 md:px-6">
         <div class="flex items-center gap-3 w-full md:w-auto">
           <div class="relative flex-grow md:flex-grow-0">
-            <input type="text" id="searchBar" placeholder="Cari donasi..." class="border border-gray-300 rounded-full pl-4 pr-10 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all duration-200 text-base md:text-lg">
+            <input type="text" id="searchBar" placeholder="Cari donasi..." class="border border-gray-500 rounded-full pl-4 pr-10 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all duration-200 text-base md:text-lg">
             <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
-              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="curren Color" stroke-width="5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </button>
           </div>
         </div>
-      </header>
+            <div class="relative ml-auto md:ml-4">
+                <button id="messageIconBtn" class="p-2 rounded-full hover:bg-gray-100 text-gray-600 hover:text-gray-800 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span id="headerMessageNotificationCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                </button>
+            </div>
+        </header>
 
       <main id="contentArea" class="p-4 md:p-8 flex-1 w-full mx-auto max-w-screen-xl">
         <section id="homePage" class="active-page space-y-6">
-          <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Daftar Donasi</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Beranda</h2>
           <div class="flex flex-wrap gap-3 md:gap-4">
             <button class="category-filter bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition-colors text-sm md:text-base" data-category="all">Semua</button>
             <button class="category-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-category="pakaian">Pakaian</button>
@@ -156,6 +165,37 @@
               </select>
             </div>
             <div>
+                <label class="block text-gray-700 text-sm md:text-base font-bold mb-2">Pilihan Pengiriman:</label>
+                <div class="flex flex-col gap-2">
+                    <label class="inline-flex items-center text-base md:text-lg">
+                        <input type="radio" name="deliveryOption" value="Antar ke Rumah" class="form-radio text-indigo-600" required>
+                        <span class="ml-2 text-gray-700">Antar ke Rumah (Donor mengantar)</span>
+                    </label>
+                    <label class="inline-flex items-center text-base md:text-lg">
+                        <input type="radio" name="deliveryOption" value="Ambil di Rumah" class="form-radio text-indigo-600">
+                        <span class="ml-2 text-gray-700">Ambil di Rumah (Penerima mengambil)</span>
+                    </label>
+                    <div id="shippingCompanyOptions" class="hidden pl-6 mt-2 space-y-2">
+                        <label class="inline-flex items-center text-base md:text-lg">
+                            <input type="radio" name="shippingCompany" value="JNT" class="form-radio text-indigo-600">
+                            <span class="ml-2 text-gray-700">JNT</span>
+                        </label>
+                        <label class="inline-flex items-center text-base md:text-lg">
+                            <input type="radio" name="shippingCompany" value="JNE" class="form-radio text-indigo-600">
+                            <span class="ml-2 text-gray-700">JNE</span>
+                        </label>
+                        <label class="inline-flex items-center text-base md:text-lg">
+                            <input type="radio" name="shippingCompany" value="SiCepat" class="form-radio text-indigo-600">
+                            <span class="ml-2 text-gray-700">SiCepat</span>
+                        </label>
+                         <label class="inline-flex items-center text-base md:text-lg">
+                            <input type="radio" name="shippingCompany" value="Pos Indonesia" class="form-radio text-indigo-600">
+                            <span class="ml-2 text-gray-700">Pos Indonesia</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
               <label for="donationAddress" class="block text-gray-700 text-sm md:text-base font-bold mb-2">Alamat Donasi:</label>
               <input type="text" id="donationAddress" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-base md:text-lg" required>
               <button type="button" id="showMapBtn" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition-colors text-sm md:text-base">Tampilkan Peta</button>
@@ -192,6 +232,32 @@
             </div>
         </section>
 
+        <section id="otherUserProfilePage" class="hidden space-y-6">
+            <button id="backToPreviousPageBtn" class="text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-2 text-base md:text-lg">
+                <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Kembali
+            </button>
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Profil Pengguna</h2>
+            <div id="otherUserProfileContent" class="bg-white p-6 md:p-8 rounded-lg shadow-md flex flex-col items-center max-w-3xl mx-auto">
+                <div class="relative">
+                    <img id="otherProfileImage" src="https://via.placeholder.com/150/F87171/FFFFFF?text=User" alt="Profile Picture" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-4 border-4 border-indigo-400 shadow-md">
+                    <span id="otherOnlineStatusDot" class="absolute bottom-6 right-2 block w-4 h-4 rounded-full bg-gray-400 border-2 border-white"></span>
+                </div>
+                <h3 id="otherProfileUsername" class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Nama Pengguna</h3>
+                <p id="otherProfileBio" class="text-gray-600 text-center mb-4 max-w-prose text-base md:text-lg">Bio pengguna lain akan ditampilkan di sini.</p>
+                <button id="chatWithOtherUserBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors text-sm md:text-base hidden">Chat Dengan Pengguna Ini</button>
+                <div class="mt-8 w-full">
+                    <h4 class="text-xl md:text-2xl font-semibold mb-4 text-gray-800">Donasi Pengguna Ini</h4>
+                    <div id="otherUserDonationsList" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        </div>
+                    <div id="noOtherUserDonations" class="hidden text-center text-gray-600 mt-8 text-lg md:text-xl">Pengguna ini belum membuat donasi.</div>
+                </div>
+            </div>
+        </section>
+
+
         <section id="editProfilePage" class="hidden space-y-6 max-w-3xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Edit Profil</h2>
             <form id="editProfileForm" class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-5 md:space-y-6">
@@ -213,10 +279,10 @@
         </section>
 
         <section id="notificationsPage" class="hidden space-y-6 max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Notifikasi</h2>
+            <h2 class="text-3xl md:text-4xl font-semibold text-gray-800">Notifikasi & Pesan</h2>
             <div class="bg-white p-6 md:p-8 rounded-lg shadow-md space-y-4">
                 <div class="mb-4">
-                    <h3 class="text-xl md:text-2xl font-semibold mb-3">Filter Notifikasi</h3>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3">Filter </h3>
                     <div class="flex flex-wrap gap-3 md:gap-4">
                         <button class="notification-filter bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition-colors text-sm md:text-base" data-notification-type="all">Semua</button>
                         <button class="notification-filter bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors text-sm md:text-base" data-notification-type="unread">Belum Dibaca</button>
@@ -339,9 +405,12 @@
       </svg>
     </a>
     <a href="#notifications" class="flex flex-col items-center p-2 rounded-lg text-sm hover:bg-gray-800 transition-colors w-1/4">
-        <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-        </svg>
+        <div class="relative">
+            <svg class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.72A2.331 2.331 0 0015.625 6H7.375A2.331 2.331 0 005 9.03v.72a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.04 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+            <span id="mobileNotificationCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+        </div>
     </a>
   </nav>
 
@@ -381,6 +450,7 @@
 
     let currentUserId = null;
     let unsubscribeOnlineStatus = null; // To manage online status listener
+    let previousHash = ''; // To track navigation for "Back" button on other user profile
 
     // Anonymous Auth with permanent ID
     auth.signInAnonymously().then(userCred => {
@@ -398,6 +468,7 @@
         setupOnlineStatusListener(currentUserId);
         loadDonasi();
         loadUserProfile(currentUserId);
+        listenForUnreadNotifications(currentUserId); // Start listening for unread notifications
       }).catch(error => {
         console.error("Error setting up anonymous user profile:", error);
       });
@@ -456,6 +527,7 @@
     const chatPage = document.getElementById('chatPage');
     const donationDetailPage = document.getElementById('donationDetailPage');
     const settingsPage = document.getElementById('settingsPage');
+    const otherUserProfilePage = document.getElementById('otherUserProfilePage'); // New
     const sidebar = document.getElementById('sidebar');
     const donasiList = document.getElementById('donasiList');
     const noResults = document.getElementById('noResults');
@@ -503,9 +575,18 @@
     const rejectRequestBtn = document.getElementById('rejectRequestBtn');
     const donationDetailContent = document.getElementById('donationDetailContent');
     const backToHomeBtn = document.getElementById('backToHomeBtn');
+    const messageIconBtn = document.getElementById('messageIconBtn'); // New: Header message icon
+    const headerMessageNotificationCount = document.getElementById('headerMessageNotificationCount'); // New
+    const sidebarNotificationCount = document.getElementById('sidebarNotificationCount'); // New
+    const mobileNotificationCount = document.getElementById('mobileNotificationCount'); // New
+    const deliveryOptions = document.querySelectorAll('input[name="deliveryOption"]'); // New
+    const shippingCompanyOptions = document.getElementById('shippingCompanyOptions'); // New
+    const backToPreviousPageBtn = document.getElementById('backToPreviousPageBtn'); // New for other user profile
+    const chatWithOtherUserBtn = document.getElementById('chatWithOtherUserBtn'); // New
 
     let currentFilterCategory = 'all';
     let currentNotificationType = 'all'; // Changed from currentMessageCategory
+    let currentOtherUserId = null; // To store the ID of the user whose profile is being viewed
 
     // --- Navigation and Page Switching ---
     function showPage(pageId) {
@@ -533,7 +614,16 @@
 
     function handleHashChange() {
       const hash = window.location.hash.substring(1);
-      if (hash === 'create-donation') {
+
+      if (hash.startsWith('user-')) { // New: Handle other user profile page
+          currentOtherUserId = hash.substring(5);
+          if (currentOtherUserId === currentUserId) { // If it's the current user, redirect to their profile
+              window.location.hash = 'profile';
+          } else {
+              showPage('otherUserProfilePage');
+              loadOtherUserProfile(currentOtherUserId);
+          }
+      } else if (hash === 'create-donation') {
         showPage('createDonationPage');
       } else if (hash === 'profile') {
         showPage('profilePage');
@@ -542,20 +632,18 @@
       } else if (hash === 'edit-profile') {
         showPage('editProfilePage');
         populateEditProfileForm(currentUserId);
-      } else if (hash === 'notifications') { // Changed from messages
+      } else if (hash === 'notifications') {
         showPage('notificationsPage');
-        loadNotifications(currentUserId, currentNotificationType); // Load notifications
+        loadNotifications(currentUserId, currentNotificationType);
       } else if (hash.startsWith('chat-')) {
-        const chatId = hash.substring(5); // "chat-CHAT_ID"
+        const chatId = hash.substring(5);
         showChatPage(chatId);
-      } else if (hash.startsWith('donation-')) { // Handle donation detail page
-        const donationId = hash.substring(9); // "donation-DONATION_ID"
+      } else if (hash.startsWith('donation-')) {
+        const donationId = hash.substring(9);
         showDonationDetail(donationId);
-      }
-       else if (hash === 'settings') {
+      } else if (hash === 'settings') {
         showPage('settingsPage');
-      }
-       else {
+      } else {
         showPage('homePage');
         loadDonasi();
       }
@@ -568,12 +656,12 @@
       });
     });
 
-    // No messageIconBtn in header anymore, as messages are part of notifications page
-    // messageIconBtn.addEventListener('click', () => {
-    //     window.location.hash = 'messages';
-    // });
+    // New: Message icon in header
+    messageIconBtn.addEventListener('click', () => {
+        window.location.hash = 'notifications';
+    });
 
-    backToNotificationsBtn.addEventListener('click', () => { // Changed backToMessagesBtn
+    backToNotificationsBtn.addEventListener('click', () => {
         window.location.hash = 'notifications';
     });
 
@@ -581,8 +669,20 @@
         window.location.hash = 'home';
     });
 
+    // New: Back button for other user profile page
+    backToPreviousPageBtn.addEventListener('click', () => {
+        if (previousHash && previousHash !== 'otherUserProfilePage') {
+            window.location.hash = previousHash;
+        } else {
+            window.history.back(); // Go back to the previous page in history
+        }
+    });
 
-    window.addEventListener('hashchange', handleHashChange);
+
+    window.addEventListener('hashchange', () => {
+        previousHash = window.location.hash.substring(1); // Store the current hash before it changes
+        handleHashChange();
+    });
     handleHashChange(); // Initial load
 
     // --- Firebase Data Loading and Display ---
@@ -616,6 +716,9 @@
                   <h3 class="font-bold text-xl md:text-2xl mb-1 text-gray-800">${data.judul}</h3>
                   <p class="text-sm md:text-base text-gray-600 mb-2">${data.lokasi}</p>
                   <span class="inline-block bg-indigo-100 text-indigo-800 text-xs md:text-sm font-semibold px-2.5 py-0.5 rounded-full">${data.category}</span>
+                  <div class="mt-2 text-xs md:text-sm text-gray-500">
+                    Pengiriman: ${data.deliveryOption} ${data.shippingCompany ? `(${data.shippingCompany})` : ''}
+                  </div>
                   <div class="flex items-center justify-between mt-4">
                       <div class="flex items-center gap-3 text-gray-600">
                           <button class="vote-btn flex items-center gap-1 text-green-600 hover:text-green-800" data-type="upvote" data-id="${donationId}">
@@ -638,13 +741,19 @@
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.882 13.07 9.283 13 9.683 13h4.634c.4 0 .702.07.9.342M17 14V10m0 0l-4-4m4 4l-4 4M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path>
                               </svg>
                           </button>
+                           ${data.donaturId !== currentUserId ? `
                            <button class="chat-btn text-gray-500 hover:text-gray-700" data-id="${donationId}" data-donor-id="${data.donaturId}">
                             <svg class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                             </svg>
-                        </button>
+                        </button>` : ''}
                       </div>
                   </div>
+                    <div class="mt-4 text-right">
+                        <button class="text-indigo-600 hover:underline text-sm md:text-base view-donor-profile-btn" data-donor-id="${data.donaturId}">
+                            Lihat Profil Donatur
+                        </button>
+                    </div>
                 </div>
               </div>
             `;
@@ -661,6 +770,7 @@
         addCommentListeners();
         addShareListeners();
         addChatListeners();
+        addOtherUserProfileListeners(); // New listener
       });
     }
 
@@ -744,7 +854,7 @@
 
             donationDetailContent.innerHTML = `
                 <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">${data.judul}</h2>
-                <div class="flex items-center gap-4 mb-6 text-gray-600">
+                <div class="flex items-center gap-4 mb-6 text-gray-600 cursor-pointer view-donor-profile-btn" data-donor-id="${data.donaturId}">
                     <div class="relative">
                         <img src="${donorProfilePic}" alt="Donatur Avatar" class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-indigo-400">
                         <span class="absolute bottom-0 right-0 block w-3 h-3 md:w-4 md:h-4 rounded-full ${isDonorOnline ? 'bg-green-500' : 'bg-gray-400'} border border-white"></span>
@@ -785,6 +895,10 @@
                         <p class="text-gray-700 text-base md:text-lg">${data.lokasi}</p>
                     </div>
                     <div>
+                        <p class="font-semibold text-gray-800 text-base md:text-lg">Pilihan Pengiriman:</p>
+                        <p class="text-gray-700 text-base md:text-lg">${data.deliveryOption} ${data.shippingCompany ? `(${data.shippingCompany})` : ''}</p>
+                    </div>
+                    <div>
                         <p class="font-semibold text-gray-800 text-base md:text-lg">Kontak Donatur:</p>
                         <p class="text-gray-700 text-base md:text-lg">${data.donorEmail} | ${data.donorPhone}</p>
                     </div>
@@ -813,6 +927,17 @@
             const detailCommentInput = document.getElementById('detailCommentInput');
             const submitDetailCommentBtn = document.getElementById('submitDetailCommentBtn');
             const requestDonationBtn = document.getElementById('requestDonationBtn');
+            const viewDonorProfileBtnDetail = donationDetailContent.querySelector('.view-donor-profile-btn'); // New
+
+            if (viewDonorProfileBtnDetail) {
+                viewDonorProfileBtnDetail.addEventListener('click', (e) => {
+                    const donorId = e.currentTarget.dataset.donorId;
+                    if (donorId) {
+                        window.location.hash = `user-${donorId}`;
+                    }
+                });
+            }
+
 
             // Re-apply vote listeners to the new buttons on the detail page
             if (upvoteBtn) upvoteBtn.addEventListener('click', () => handleVote(donationId, 'upvote'));
@@ -858,10 +983,10 @@
             db.collection('donasi').doc(donationId).onSnapshot(doc => {
                 if (doc.exists) {
                     const data = doc.data();
-                    const upvotesCountElem = donationDetailContent.querySelector('.vote-btn[data-type="upvote"] span');
-                    const downvotesCountElem = donationDetailContent.querySelector('.vote-btn[data-type="downvote"] span');
-                    if (upvotesCountElem) upvotesCountElem.textContent = data.upvotes ? data.upvotes.length : 0;
-                    if (downvotesCountElem) downvotesCountElem.textContent = data.downvotes ? data.downvotes.length : 0;
+                    const upvotesCountElem = donationDetailContent.querySelector('#upvoteCountDetail');
+                    const downvotesCountElem = donationDetailContent.querySelector('#downvoteCountDetail');
+                    if (upvotesCountElem) upvotesCountElem.textContent = `${data.upvotes ? data.upvotes.length : 0} Suka`;
+                    if (downvotesCountElem) downvotesCountElem.textContent = `${data.downvotes ? data.downvotes.length : 0} Tidak Suka`;
                 }
             });
 
@@ -1218,9 +1343,9 @@
                 if (typeFilter !== 'all') {
                     if (typeFilter === 'unread' && notification.read) {
                         display = false;
-                    } else if (typeFilter === 'chats' && notification.type !== 'new_chat') {
+                    } else if (typeFilter === 'chats' && notification.type !== 'new_chat' && notification.type !== 'new_message') {
                         display = false;
-                    } else if (typeFilter === 'requests' && notification.type !== 'donation_request') {
+                    } else if (typeFilter === 'requests' && notification.type !== 'donation_request' && notification.type !== 'request_accepted' && notification.type !== 'request_rejected') {
                         display = false;
                     }
                 }
@@ -1239,22 +1364,35 @@
                     let notificationAction = '';
                     let notificationIcon = '';
                     let actionUrl = '';
+                    let additionalClass = '';
 
-                    if (notification.type === 'new_chat' && notification.chatId) {
-                        notificationIcon = `<svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>`;
-                        notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Buka Chat</button>`;
+                    if (!notification.read) {
+                        additionalClass = 'bg-blue-50 hover:bg-blue-100';
+                    }
+
+                    if ((notification.type === 'new_chat' || notification.type === 'new_message' || notification.type === 'donation_request') && notification.chatId) {
                         actionUrl = `#chat-${notification.chatId}`;
-                    } else if (notification.type === 'donation_request' && notification.chatId) {
-                        notificationIcon = `<svg class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
-                        notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Tanggapi Permintaan</button>`;
-                        actionUrl = `#chat-${notification.chatId}`;
-                    } else {
+                        if (notification.type === 'new_chat' || notification.type === 'new_message') {
+                            notificationIcon = `<svg class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>`;
+                            notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Buka Chat</button>`;
+                        } else if (notification.type === 'donation_request') {
+                            notificationIcon = `<svg class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                            notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Tanggapi Permintaan</button>`;
+                        }
+                    } else if (notification.type === 'request_accepted' || notification.type === 'request_rejected') {
+                         notificationIcon = `<svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                         if (notification.chatId) {
+                            notificationAction = `<button class="text-indigo-600 hover:underline open-chat-btn" data-chat-id="${notification.chatId}" data-notification-id="${notificationId}">Lihat Chat</button>`;
+                            actionUrl = `#chat-${notification.chatId}`;
+                         }
+                    }
+                    else {
                         notificationIcon = `<svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
                     }
 
 
                     notificationList.innerHTML += `
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center gap-4 transition-colors cursor-pointer notification-item ${notification.read ? 'opacity-70' : 'bg-blue-50 hover:bg-blue-100'}" data-notification-id="${notificationId}" data-action-url="${actionUrl}">
+                        <div class="bg-gray-50 p-4 rounded-lg flex items-center gap-4 transition-colors cursor-pointer notification-item ${notification.read ? 'opacity-70' : additionalClass}" data-notification-id="${notificationId}" data-action-url="${actionUrl}">
                             <img src="${fromUserAvatar}" alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
                             ${notificationIcon}
                             <div class="flex-grow">
@@ -1276,6 +1414,30 @@
             notificationList.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat notifikasi.</p>';
         }
     }
+
+    // New: Listen for unread notifications and update counts
+    function listenForUnreadNotifications(uid) {
+        if (!uid) return;
+        db.collection('users').doc(uid).collection('notifications').where('read', '==', false)
+            .onSnapshot(snapshot => {
+                const unreadCount = snapshot.size;
+                if (unreadCount > 0) {
+                    headerMessageNotificationCount.textContent = unreadCount;
+                    headerMessageNotificationCount.classList.remove('hidden');
+                    sidebarNotificationCount.textContent = unreadCount;
+                    sidebarNotificationCount.classList.remove('hidden');
+                    mobileNotificationCount.textContent = unreadCount;
+                    mobileNotificationCount.classList.remove('hidden');
+                } else {
+                    headerMessageNotificationCount.classList.add('hidden');
+                    sidebarNotificationCount.classList.add('hidden');
+                    mobileNotificationCount.classList.add('hidden');
+                }
+            }, error => {
+                console.error("Error listening for unread notifications:", error);
+            });
+    }
+
 
     function addNotificationListeners() {
         document.querySelectorAll('.notification-item').forEach(item => {
@@ -1425,7 +1587,7 @@
                         text: messageText,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                    chatRef.update({
+                    await chatRef.update({ // Await the update to ensure lastMessageAt is set
                         lastMessageAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
 
@@ -1568,6 +1730,8 @@
       const condition = document.querySelector('input[name="condition"]:checked')?.value;
       const category = document.getElementById('category').value;
       const address = document.getElementById('donationAddress').value;
+      const deliveryOption = document.querySelector('input[name="deliveryOption"]:checked')?.value; // New
+      const shippingCompany = document.querySelector('input[name="shippingCompany"]:checked')?.value || null; // New
       const mediaFiles = mediaUploadInput.files;
 
       if (!condition) {
@@ -1577,6 +1741,21 @@
           uploadSpinner.classList.add('hidden');
           return;
       }
+       if (!deliveryOption) { // New validation
+          alert("Mohon pilih opsi pengiriman.");
+          uploadBtn.disabled = false;
+          uploadBtnText.classList.remove('hidden');
+          uploadSpinner.classList.add('hidden');
+          return;
+      }
+      if (deliveryOption === 'Antar ke Rumah' && !shippingCompany) { // New validation
+          alert("Mohon pilih jasa pengiriman jika Anda ingin mengantar ke rumah.");
+          uploadBtn.disabled = false;
+          uploadBtnText.classList.remove('hidden');
+          uploadSpinner.classList.add('hidden');
+          return;
+      }
+
 
       const uploadedUrls = [];
       if (mediaFiles.length > 0) {
@@ -1598,6 +1777,8 @@
           condition: condition,
           category: category,
           lokasi: address,
+          deliveryOption: deliveryOption, // New field
+          shippingCompany: shippingCompany, // New field
           fotoUrls: uploadedUrls.filter(url => url.match(/\.(jpeg|jpg|png|gif)$/i)),
           videoUrls: uploadedUrls.filter(url => url.match(/\.(mp4|mov|avi)$/i)),
           donaturId: currentUserId,
@@ -1619,6 +1800,25 @@
         uploadSpinner.classList.add('hidden');
       }
     });
+
+    // New: Delivery Option Logic
+    deliveryOptions.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.value === 'Antar ke Rumah') {
+                shippingCompanyOptions.classList.remove('hidden');
+                // Make shipping company radio buttons required
+                shippingCompanyOptions.querySelectorAll('input[name="shippingCompany"]').forEach(input => input.setAttribute('required', 'required'));
+            } else {
+                shippingCompanyOptions.classList.add('hidden');
+                // Remove required attribute and uncheck them if hidden
+                shippingCompanyOptions.querySelectorAll('input[name="shippingCompany"]').forEach(input => {
+                    input.removeAttribute('required');
+                    input.checked = false;
+                });
+            }
+        });
+    });
+
 
     // --- Media File Preview ---
     mediaUploadInput.addEventListener('change', (e) => {
@@ -1711,6 +1911,9 @@
                             <h4 class="font-bold text-lg md:text-xl mb-1">${data.judul}</h4>
                             <p class="text-sm md:text-base text-gray-600 mb-2">${data.lokasi}</p>
                             <span class="inline-block bg-indigo-100 text-indigo-800 text-xs md:text-sm font-semibold px-2.5 py-0.5 rounded-full">${data.category}</span>
+                             <div class="mt-2 text-xs md:text-sm text-gray-500">
+                                Pengiriman: ${data.deliveryOption} ${data.shippingCompany ? `(${data.shippingCompany})` : ''}
+                            </div>
                             <div class="mt-3 flex gap-2">
                                 <button class="view-my-donation-btn bg-blue-500 hover:bg-blue-600 text-white text-sm md:text-base px-3 py-1 rounded-full" data-donation-id="${donationId}">Lihat</button>
                                 <button class="delete-my-donation-btn bg-red-500 hover:bg-red-600 text-white text-sm md:text-base px-3 py-1 rounded-full" data-donation-id="${donationId}">Hapus</button>
@@ -1746,6 +1949,193 @@
             });
         });
     }
+
+    // New: Other User Profile Functions
+    function addOtherUserProfileListeners() {
+        document.querySelectorAll('.view-donor-profile-btn').forEach(button => {
+            button.removeEventListener('click', handleViewOtherProfileClick);
+            button.addEventListener('click', handleViewOtherProfileClick);
+        });
+    }
+
+    function handleViewOtherProfileClick(e) {
+        const donorId = e.currentTarget.dataset.donorId;
+        if (donorId && donorId !== currentUserId) {
+            window.location.hash = `user-${donorId}`;
+        } else if (donorId === currentUserId) {
+            window.location.hash = `profile`; // Redirect to own profile if clicking own link
+        }
+    }
+
+    async function loadOtherUserProfile(uid) {
+        const otherProfileImage = document.getElementById('otherProfileImage');
+        const otherOnlineStatusDot = document.getElementById('otherOnlineStatusDot');
+        const otherProfileUsername = document.getElementById('otherProfileUsername');
+        const otherProfileBio = document.getElementById('otherProfileBio');
+        const otherUserDonationsList = document.getElementById('otherUserDonationsList');
+        const noOtherUserDonations = document.getElementById('noOtherUserDonations');
+        const chatWithOtherUserBtn = document.getElementById('chatWithOtherUserBtn');
+
+        chatWithOtherUserBtn.classList.add('hidden'); // Hide by default
+
+        if (!uid) {
+            otherProfileUsername.textContent = 'Pengguna Tidak Ditemukan';
+            otherProfileBio.textContent = '';
+            otherProfileImage.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=U';
+            otherOnlineStatusDot.classList.remove('bg-green-500');
+            otherOnlineStatusDot.classList.add('bg-gray-400');
+            otherUserDonationsList.innerHTML = '';
+            noOtherUserDonations.classList.remove('hidden');
+            return;
+        }
+
+        try {
+            const userDoc = await db.collection('users').doc(uid).get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                otherProfileUsername.textContent = userData.username || 'Pengguna Anonim';
+                otherProfileBio.textContent = userData.bio || 'Pengguna ini belum menulis bio.';
+                if (userData.profilePhotoUrl) {
+                    otherProfileImage.src = userData.profilePhotoUrl;
+                } else {
+                    otherProfileImage.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=U';
+                }
+
+                if (userData.isOnline) {
+                    otherOnlineStatusDot.classList.remove('bg-gray-400');
+                    otherOnlineStatusDot.classList.add('bg-green-500');
+                } else {
+                    otherOnlineStatusDot.classList.remove('bg-green-500');
+                    otherOnlineStatusDot.classList.add('bg-gray-400');
+                }
+
+                if (uid !== currentUserId) {
+                    chatWithOtherUserBtn.classList.remove('hidden');
+                    // Remove existing listener to prevent duplicates
+                    chatWithOtherUserBtn.removeEventListener('click', handleChatWithOtherUser);
+                    chatWithOtherUserBtn.addEventListener('click', () => handleChatWithOtherUser(uid));
+                }
+
+            } else {
+                otherProfileUsername.textContent = 'Pengguna Tidak Ditemukan';
+                otherProfileBio.textContent = '';
+                otherProfileImage.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=U';
+                otherOnlineStatusDot.classList.remove('bg-green-500');
+                otherOnlineStatusDot.classList.add('bg-gray-400');
+            }
+
+            // Load donations by this user
+            db.collection('donasi').where('donaturId', '==', uid).orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+                otherUserDonationsList.innerHTML = '';
+                let hasOtherUserDonations = false;
+                if (snapshot.empty) {
+                    noOtherUserDonations.classList.remove('hidden');
+                    return;
+                }
+                noOtherUserDonations.classList.add('hidden');
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const donationId = doc.id;
+                    hasOtherUserDonations = true;
+                    const imageUrl = data.fotoUrls && data.fotoUrls.length > 0 ? data.fotoUrls[0] : 'https://via.placeholder.com/300x200?text=No+Image';
+
+                    otherUserDonationsList.innerHTML += `
+                        <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg cursor-pointer donation-card" data-id="${donationId}">
+                            <img src="${imageUrl}" alt="${data.judul}" class="w-full h-32 object-cover">
+                            <div class="p-3">
+                                <h4 class="font-bold text-lg md:text-xl mb-1">${data.judul}</h4>
+                                <p class="text-sm md:text-base text-gray-600 mb-2">${data.lokasi}</p>
+                                <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">${data.category}</span>
+                                <div class="mt-3">
+                                    <button class="view-other-user-donation-btn bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded-full" data-donation-id="${donationId}">Lihat Donasi</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                if (!hasOtherUserDonations) {
+                    noOtherUserDonations.classList.remove('hidden');
+                } else {
+                    noOtherUserDonations.classList.add('hidden');
+                }
+                // Add listeners for view buttons on other user's donations
+                document.querySelectorAll('.view-other-user-donation-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const donationId = e.currentTarget.dataset.donationId;
+                        window.location.hash = `donation-${donationId}`;
+                    });
+                });
+            });
+
+        } catch (error) {
+            console.error("Error loading other user profile:", error);
+            otherProfileUsername.textContent = 'Gagal Memuat Profil';
+            otherProfileBio.textContent = '';
+            otherProfileImage.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=U';
+            otherOnlineStatusDot.classList.remove('bg-green-500');
+            otherOnlineStatusDot.classList.add('bg-gray-400');
+            otherUserDonationsList.innerHTML = '<p class="text-center text-red-500 py-4">Gagal memuat donasi pengguna.</p>';
+        }
+    }
+
+    async function handleChatWithOtherUser(otherUserId) {
+        if (!currentUserId) {
+            alert('Anda harus masuk untuk memulai chat.');
+            return;
+        }
+        if (currentUserId === otherUserId) {
+            alert('Anda tidak bisa chat dengan diri sendiri.');
+            return;
+        }
+
+        try {
+            let chatId = null;
+            const chatsRef = db.collection('chats');
+
+            // Find existing chat involving only these two participants (without specific donation)
+            // This assumes direct chats are generic, not tied to a single donation, which might need adjustment based on your chat model
+            // For simplicity, let's look for a chat where these two are the *only* participants.
+            // A more robust solution might involve a separate 'direct_chats' collection or checking for chats with a specific structure.
+
+            // Option 1: Find a chat where these two are the only participants
+            const query1 = await chatsRef.where('participants', '==', [currentUserId, otherUserId]).get();
+            const query2 = await chatsRef.where('participants', '==', [otherUserId, currentUserId]).get();
+
+            if (!query1.empty) {
+                chatId = query1.docs[0].id;
+            } else if (!query2.empty) {
+                chatId = query2.docs[0].id;
+            } else {
+                // If no direct chat exists, create one without a donationId for general chat
+                const newChatRef = await chatsRef.add({
+                    participants: [currentUserId, otherUserId],
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastMessageAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    isDirectChat: true // Mark as a direct chat not tied to a specific donation
+                });
+                chatId = newChatRef.id;
+
+                // Add notification for the recipient about new chat
+                const otherUserDoc = await db.collection('users').doc(otherUserId).get();
+                const otherUsername = otherUserDoc.exists ? (otherUserDoc.data().username || 'Pengguna Tak Dikenal') : 'Pengguna Tak Dikenal';
+
+                await db.collection('users').doc(otherUserId).collection('notifications').add({
+                    type: 'new_chat',
+                    fromUserId: currentUserId,
+                    chatId: chatId,
+                    message: `Anda punya chat baru dari ${currentUserId.substring(0,4)}.`,
+                    read: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            }
+            window.location.hash = `chat-${chatId}`;
+
+        } catch (error) {
+            console.error("Error starting direct chat:", error);
+            alert("Gagal memulai chat langsung. Coba lagi.");
+        }
+    }
+
 
     // Edit Profile related functions
     editProfileBtn.addEventListener('click', () => {
@@ -1799,16 +2189,16 @@
         let profilePhotoUrl = editProfileImage.src; // Keep current if not changed
 
         if (profileFile) {
-            const uploadSpinner = document.createElement('span');
-            uploadSpinner.className = 'animate-spin h-5 w-5 border-4 border-white border-t-transparent rounded-full ml-2';
-            e.target.querySelector('button[type="submit"]').appendChild(uploadSpinner);
-            e.target.querySelector('button[type="submit"]').disabled = true;
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Uploading...';
+            submitButton.disabled = true;
 
             profilePhotoUrl = await uploadToCloudinary(profileFile);
             if (!profilePhotoUrl) {
                 alert('Gagal mengunggah foto profil.');
-                e.target.querySelector('button[type="submit"]').disabled = false;
-                uploadSpinner.remove();
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
                 return;
             }
         }
@@ -1825,9 +2215,9 @@
             console.error("Error updating profile:", error);
             alert("Gagal memperbarui profil. Coba lagi.");
         } finally {
-            e.target.querySelector('button[type="submit"]').disabled = false;
-            const spinner = e.target.querySelector('button[type="submit"] span');
-            if (spinner) spinner.remove();
+             const submitButton = e.target.querySelector('button[type="submit"]');
+            submitButton.disabled = false;
+            submitButton.textContent = 'Simpan Perubahan'; // Reset text
         }
     });
 
